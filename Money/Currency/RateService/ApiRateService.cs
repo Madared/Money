@@ -1,6 +1,6 @@
 using Results;
 
-namespace Money;
+namespace Money.Currency.RateService;
 
 public class ApiRateService : IRateService
 {
@@ -10,7 +10,7 @@ public class ApiRateService : IRateService
     {
         _client = client;
     }
-    public async Task<Result<ConversionRate>> GetRate(Currency from, Currency to)
+    public async Task<Result<ConversionRate>> GetRate(global::Money.Currency.Currency from, global::Money.Currency.Currency to)
     {
         return await Task.FromResult(Result<ConversionRate>.Fail(new UnknownError()));
     }

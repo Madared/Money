@@ -1,6 +1,4 @@
-using System.Dynamic;
-
-namespace Money;
+namespace Money.Currency;
 
 public record CurrencyRates(
     ConversionRate ToDollar,

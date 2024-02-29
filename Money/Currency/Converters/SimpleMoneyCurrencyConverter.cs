@@ -1,6 +1,7 @@
+using Money.Currency.RateService;
 using Results;
 
-namespace Money;
+namespace Money.Currency.Converters;
 
 public class SimpleMoneyCurrencyConverter : IMoneyCurrencyConverter
 {
@@ -11,7 +12,7 @@ public class SimpleMoneyCurrencyConverter : IMoneyCurrencyConverter
         _rateService = service;
     }
 
-    public Result<Money> Convert(Money toConvert, Currency convertTo) => Task.Run(() =>_rateService
+    public Result<Money> Convert(Money toConvert, global::Money.Currency.Currency convertTo) => Task.Run(() =>_rateService
         .GetRate(toConvert.Currency, convertTo)).Result
         .Map(rate => toConvert.CashAmount.Times(rate))
         .Map(cashAmount => new Money(cashAmount, convertTo));

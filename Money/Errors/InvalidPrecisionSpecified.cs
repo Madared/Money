@@ -1,6 +1,7 @@
+using Money.Currency;
 using Results;
 
-namespace Money;
+namespace Money.Errors;
 
 public class InvalidPrecisionSpecified : Exception, IError
 {

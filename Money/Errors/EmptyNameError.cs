@@ -1,6 +1,6 @@
 using Results;
 
-namespace Money;
+namespace Money.Errors;
 
 public class EmptyNameError : Exception, IError
 {

@@ -1,4 +1,6 @@
-namespace Money;
+using Money.Errors;
+
+namespace Money.Currency;
 
 public record CurrencySeparators(string DecimalSeparator, string ThousandSeparator)
 {

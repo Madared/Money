@@ -1,4 +1,4 @@
-namespace Money;
+namespace Money.Currency;
 
 public enum CurrencySymbolPosition
 {

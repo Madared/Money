@@ -1,7 +1,7 @@
 using System.Globalization;
 using Results;
 
-namespace Money;
+namespace Money.Currency;
 
 public record Currency(Name Name, CurrencyRates Rates, CurrencySymbol Symbol, CurrencySeparators Separators)
 {
