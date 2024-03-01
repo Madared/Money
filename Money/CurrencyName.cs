@@ -3,19 +3,19 @@ using Results;
 
 namespace Money;
 
-public record Name
+public record CurrencyName
 {
-    public string StringName { get; }
+    private string StringName { get; }
 
-    private Name(string name)
+    private CurrencyName(string name)
     {
         if (name.IsEmpty()) throw new InvalidOperationException();
         StringName = name;
     }
 
-    public static Result<Name> Create(string name) => name.IsEmpty()
-        ? Result<Name>.Fail(new EmptyNameError())
-        : Result<Name>.Ok(new Name(name));
+    public static Result<CurrencyName> Create(string name) => name.IsEmpty()
+        ? Result<CurrencyName>.Fail(new EmptyNameError())
+        : Result<CurrencyName>.Ok(new CurrencyName(name));
 
-    public static implicit operator string(Name name) => name.StringName;
+    public static implicit operator string(CurrencyName currencyName) => currencyName.StringName;
 }
