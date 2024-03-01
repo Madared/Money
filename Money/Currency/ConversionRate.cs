@@ -12,12 +12,15 @@ public record ConversionRate : IPositiveDecimal
         Amount = value;
     }
 
+    ///<see cref="IPositiveDecimal.Times"/>
     public ConversionRate Times(IPositiveDecimal positiveDecimal) =>
         Create(Amount * positiveDecimal.Amount).Data;
 
+    /// <see cref="IPositiveDecimal.Times"/>>
     public ConversionRate Plus(IPositiveDecimal positiveDecimal) =>
         Create(Amount + positiveDecimal.Amount).Data;
 
+    /// <see cref="IPositiveDecimal.Times"/>>
     public ConversionRate DivideBy(IPositiveDecimal positiveDecimal) =>
         Create(Amount / positiveDecimal.Amount).Data;
 
