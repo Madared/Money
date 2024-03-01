@@ -4,5 +4,5 @@ namespace Money.Currency.RateService;
 
 public interface IRateService
 {
-    Task<Result<ConversionRate>> GetRate(global::Money.Currency.Currency from, global::Money.Currency.Currency to);
+    Task<Result<ConversionRate>> GetRate(Currency from, Currency to);
 }

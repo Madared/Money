@@ -14,7 +14,7 @@ public class BackedUpRateService : IRateService
 
     public void AddBackup(IRateService service) => _backups.Add(service);
 
-    private async Task<Result<ConversionRate>> TryBackups(global::Money.Currency.Currency from, global::Money.Currency.Currency to)
+    private async Task<Result<ConversionRate>> TryBackups(Currency from, Currency to)
     {
         RateAttempter attempter = new();
         int index = 0;
