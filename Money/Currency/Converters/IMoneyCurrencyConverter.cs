@@ -4,5 +4,5 @@ namespace Money.Currency.Converters;
 
 public interface IMoneyCurrencyConverter
 {
-    Result<Money> Convert(Money toConvert, global::Money.Currency.Currency convertTo);
+    Result<Money> Convert(Money toConvert, Currency convertTo);
 }
