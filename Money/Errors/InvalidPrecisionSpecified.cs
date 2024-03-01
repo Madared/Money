@@ -5,8 +5,8 @@ namespace Money.Errors;
 
 public class InvalidPrecisionSpecified : Exception, IError
 {
-    private string _value;
-    private DecimalPrecisionValue _precision;
+    private readonly string _value;
+    private readonly DecimalPrecisionValue _precision;
     
     public InvalidPrecisionSpecified(string value, DecimalPrecisionValue precision) :
         base($"The value {value} does not have the specified precision of {precision}")
