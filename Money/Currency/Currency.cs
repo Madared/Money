@@ -5,6 +5,11 @@ namespace Money.Currency;
 
 public record Currency(CurrencyName CurrencyName, CurrencyRates Rates, CurrencySymbol Symbol, CurrencySeparators Separators)
 {
+    /// <summary>
+    /// Formats the currency value according to the specific internals provided such as symbols, separators, and precisions
+    /// </summary>
+    /// <param name="value">value to format</param>
+    /// <returns></returns>
     string Format(decimal value) => Math.Round(value, Rates.DisplayPrecision)
         .ToString(CultureInfo.InvariantCulture)
         .PipeNonNull(Symbol.AddSymbol)
