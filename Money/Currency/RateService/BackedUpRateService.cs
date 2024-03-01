@@ -4,8 +4,8 @@ namespace Money.Currency.RateService;
 
 public class BackedUpRateService : IRateService
 {
-    private IRateService _main;
-    private List<IRateService> _backups = new();
+    private readonly IRateService _main;
+    private readonly List<IRateService> _backups = new();
 
     public BackedUpRateService(IRateService main)
     {
@@ -29,7 +29,7 @@ public class BackedUpRateService : IRateService
             : Result<ConversionRate>.Ok(attempter.ObtainedRate.Data);
     }
 
-    public async Task<Result<ConversionRate>> GetRate(global::Money.Currency.Currency from, global::Money.Currency.Currency to)
+    public async Task<Result<ConversionRate>> GetRate(Currency from, Currency to)
     {
         Result<ConversionRate> result = await _main.GetRate(from, to);
         if (result.Succeeded) return result;
