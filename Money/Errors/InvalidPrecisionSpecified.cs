@@ -16,5 +16,5 @@ public class InvalidPrecisionSpecified : Exception, IError
     }
 
     public void Log(IErrorLogger logger) =>
-        logger.LogError($"The value {_value} does not have the specified precision of {_precision}");
+        logger.LogError(Message);
 }
