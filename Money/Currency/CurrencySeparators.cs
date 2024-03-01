@@ -4,12 +4,6 @@ namespace Money.Currency;
 
 public record CurrencySeparators(string DecimalSeparator, string ThousandSeparator)
 {
-    private bool IsThousand(int totalLength, int index, DecimalPrecisionValue precision)
-    {
-        int value = totalLength - 1 - index - precision;
-        return value > 0 && value % 3 == 0;
-    }
-
     public string AddThousandSeparator(string value, DecimalPrecisionValue displayPrecision)
     {
         string final = "";
@@ -23,7 +17,6 @@ public record CurrencySeparators(string DecimalSeparator, string ThousandSeparat
         return final;
     }
 
-    private bool IsDefaultSeparator(char separator) => separator == ',' || separator == '.';
 
     public string ReplaceDecimalSeparator(string value, DecimalPrecisionValue precision)
     {
@@ -32,4 +25,12 @@ public record CurrencySeparators(string DecimalSeparator, string ThousandSeparat
             ? value.Remove(index, 1).Insert(index, DecimalSeparator)
             : throw new InvalidPrecisionSpecified(value, precision);
     }
+
+    private static bool IsThousand(int totalLength, int index, DecimalPrecisionValue precision)
+    {
+        int value = totalLength - 1 - index - precision;
+        return value > 0 && value % 3 == 0;
+    }
+
+    private static bool IsDefaultSeparator(char separator) => separator is ',' or '.';
 }
