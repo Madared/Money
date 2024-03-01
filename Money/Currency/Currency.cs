@@ -3,7 +3,7 @@ using Results;
 
 namespace Money.Currency;
 
-public record Currency(Name Name, CurrencyRates Rates, CurrencySymbol Symbol, CurrencySeparators Separators)
+public record Currency(CurrencyName CurrencyName, CurrencyRates Rates, CurrencySymbol Symbol, CurrencySeparators Separators)
 {
     string Format(decimal value) => Math.Round(value, Rates.DisplayPrecision)
         .ToString(CultureInfo.InvariantCulture)
@@ -13,11 +13,11 @@ public record Currency(Name Name, CurrencyRates Rates, CurrencySymbol Symbol, Cu
 
     public static Currency Dollar()
     {
-        Name name = Name.Create("dollar").Data;
+        CurrencyName currencyName = CurrencyName.Create("dollar").Data;
         CurrencySeparators separators = new(",", ".");
         CurrencySymbol symbol = new("$", "USD", CurrencySymbolPosition.prefix, true);
         CurrencyRates rates = new(ConversionRate.One(), DecimalPrecisionValue.Two(), DecimalPrecisionValue.Two());
-        Currency dollar = new(name, rates, symbol, separators);
+        Currency dollar = new(currencyName, rates, symbol, separators);
         return dollar;
     }
 }

@@ -4,6 +4,12 @@ namespace Money.Currency;
 
 public record CurrencySeparators(string DecimalSeparator, string ThousandSeparator)
 {
+    /// <summary>
+    /// Adds the thousand separator to the string representation of a decimal value
+    /// </summary>
+    /// <param name="value">string representation of decimal value</param>
+    /// <param name="displayPrecision">the number of significant values after the decimal separator</param>
+    /// <returns></returns>
     public string AddThousandSeparator(string value, DecimalPrecisionValue displayPrecision)
     {
         string final = "";
@@ -18,6 +24,13 @@ public record CurrencySeparators(string DecimalSeparator, string ThousandSeparat
     }
 
 
+    /// <summary>
+    /// Replaces the default decimal CultureInvariant separator of a string representation of a value
+    /// </summary>
+    /// <param name="value">string representation of decimal value</param>
+    /// <param name="precision">The number of significant values after the decimal separator</param>
+    /// <returns></returns>
+    /// <exception cref="InvalidPrecisionSpecified"></exception>
     public string ReplaceDecimalSeparator(string value, DecimalPrecisionValue precision)
     {
         int index = value.Length - 1 - precision;
