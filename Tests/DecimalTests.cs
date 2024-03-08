@@ -61,4 +61,18 @@ public class DecimalTests
         decimal addedDecimal = DecimalHundred + DecimalTwo;
         Assert.Equal(addedDecimal, added.Amount);
     }
+
+    [Fact]
+    public void PositiveDecimal_Max_Value_Plus_Throws_Overflow()
+    {
+        IPositiveDecimal max = PositiveDecimal.Create(decimal.MaxValue).Data;
+        Assert.Throws<OverflowException>(() => max.Plus(max));
+    }
+
+    [Fact]
+    public void PositiveDecimal_Max_Value_Times_Throws_Overflow()
+    {
+        IPositiveDecimal max = PositiveDecimal.Create(decimal.MaxValue).Data;
+        Assert.Throws<OverflowException>(() => max.Plus(max));
+    }
 }

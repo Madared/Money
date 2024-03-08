@@ -23,18 +23,4 @@ public record PositiveDecimal : IPositiveDecimal
     public static Result<PositiveDecimal> Create(decimal amount) => IsNegativeOrZero(amount)
         ? Result<PositiveDecimal>.Fail(new InvalidPositiveDecimal(amount))
         : Result<PositiveDecimal>.Ok(new PositiveDecimal(amount));
-
-    public static PositiveDecimal One() => new PositiveDecimal(1);
-
-    /// <inheritdoc cref="IPositiveDecimal.Times"/>
-    public IPositiveDecimal Times(IPositiveDecimal positiveDecimal) =>
-        new PositiveDecimal(Amount * positiveDecimal.Amount);
-
-    /// <inheitdoc cref="IPositiveDecimal.DivideBy"/>
-    public IPositiveDecimal DivideBy(IPositiveDecimal positiveDecimal) =>
-        new PositiveDecimal(Amount / positiveDecimal.Amount);
-
-    /// <inheritdoc cref="IPositiveDecimal.Plus"/>
-    public IPositiveDecimal Plus(IPositiveDecimal positiveDecimal) =>
-        new PositiveDecimal(Amount + positiveDecimal.Amount);
 }

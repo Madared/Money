@@ -11,23 +11,6 @@ public record ConversionRate : IPositiveDecimal
         if (value <= 0) throw new InvalidDataException();
         Amount = value;
     }
-
-    ///<inheritdoc cref="IPositiveDecimal.Times"/>
-    public ConversionRate Times(IPositiveDecimal positiveDecimal) =>
-        Create(Amount * positiveDecimal.Amount).Data;
-
-    ///<inheritdoc cref="IPositiveDecimal.Times"/>>
-    public ConversionRate Plus(IPositiveDecimal positiveDecimal) =>
-        Create(Amount + positiveDecimal.Amount).Data;
-
-    ///<inheritdoc cref="IPositiveDecimal.Times"/>>
-    public ConversionRate DivideBy(IPositiveDecimal positiveDecimal) =>
-        Create(Amount / positiveDecimal.Amount).Data;
-
-    IPositiveDecimal IPositiveDecimal.Times(IPositiveDecimal positiveDecimal) => Times(positiveDecimal);
-    IPositiveDecimal IPositiveDecimal.DivideBy(IPositiveDecimal positiveDecimal) => DivideBy(positiveDecimal);
-    IPositiveDecimal IPositiveDecimal.Plus(IPositiveDecimal positiveDecimal) => Plus(positiveDecimal);
-
     public static ConversionRate One() => new(1);
 
     public static Result<ConversionRate> Create(decimal value) => value <= 0

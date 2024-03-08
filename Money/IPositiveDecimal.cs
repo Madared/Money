@@ -1,27 +1,12 @@
 namespace Money;
 
+/// <summary>
+/// Interface intended to be added to all decimals which can guarantee they will always be positive
+/// </summary>
 public interface IPositiveDecimal
 {
+    /// <summary>
+    /// internal value of the positive decimal
+    /// </summary>
     decimal Amount { get; }
-
-    /// <summary>
-    /// Multiplies two positive decimal values together guaranteeing the result of the operation is also a positive decimal
-    /// </summary>
-    /// <param name="positiveDecimal"></param>
-    /// <returns></returns>
-    IPositiveDecimal Times(IPositiveDecimal positiveDecimal);
-
-    /// <summary>
-    /// Divides two positive decimal values together guaranteeing the result of the operation is also a positive decimal
-    /// </summary>
-    /// <param name="positiveDecimal"></param>
-    /// <returns></returns>
-    IPositiveDecimal DivideBy(IPositiveDecimal positiveDecimal);
-
-    /// <summary>
-    /// Adds two positive values together guaranteeing the result of the operation is also a positive decimal
-    /// </summary>
-    /// <param name="positiveDecimal"></param>
-    /// <returns></returns>
-    IPositiveDecimal Plus(IPositiveDecimal positiveDecimal);
 }
