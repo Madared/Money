@@ -10,7 +10,7 @@ public record Currency(CurrencyName CurrencyName, CurrencyRates Rates, CurrencyS
     /// </summary>
     /// <param name="value">value to format</param>
     /// <returns></returns>
-    string Format(decimal value) => Math.Round(value, Rates.DisplayPrecision)
+    public string Format(decimal value) => Math.Round(value, Rates.DisplayPrecision)
         .ToString(CultureInfo.InvariantCulture)
         .PipeNonNull(Symbol.AddSymbol)
         .PipeNonNull(strValue => Separators.AddThousandSeparator(strValue, Rates.DisplayPrecision))
