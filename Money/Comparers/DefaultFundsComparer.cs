@@ -1,17 +1,27 @@
 using Money.Currency.Converters;
+using Results;
 
 namespace Money.Comparers;
 
-public class DefaultFundsComparer : IComparer<IFunds> {
+public class DefaultFundsComparer : IFundsComparer {
     private readonly IFundsCurrencyConverter _converter;
-    
-    public int Compare(IFunds? x, IFunds? y) {
-        if (x.Currency == y.Currency) {
-            
-        }
+
+    public DefaultFundsComparer(IFundsCurrencyConverter converter) {
+        _converter = converter;
     }
 
-    private static int SameCurrencyComparison(IFunds x, IFunds y) {
-        
+    public Task<Result<FundsComparison>> Compare(IFunds first, IFunds second) {
+        if (first.Currency == second.Currency) {
+            return Task.FromResult(Result<FundsComparison>.Ok(SameCurrencyComparing(first, second)));
+        }
+
+        return _converter
+            .Convert(second, first.Currency)
+            .MapAsync(converted => SameCurrencyComparing(first, converted));
+    }
+    private static FundsComparison SameCurrencyComparing(IFunds first, IFunds second) {
+        if (first.Amount > second.Amount) return FundsComparison.Greater;
+        if (first.Amount < second.Amount) return FundsComparison.Lesser;
+        return FundsComparison.Equal;
     }
 }
