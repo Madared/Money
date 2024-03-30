@@ -3,7 +3,7 @@ using Results;
 
 namespace Money.Currency.Converters;
 
-public class DefaultDebtCurrencyConverter : IFundsCurrencyConverter<Debt> {
+public class DefaultDebtCurrencyConverter : IDebtCurrencyConverter {
     private readonly IRateService _rateService;
 
     public DefaultDebtCurrencyConverter(IRateService rateService) {
