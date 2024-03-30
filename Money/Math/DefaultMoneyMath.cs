@@ -1,0 +1,76 @@
+using Money.Currency.Converters;
+using Results;
+
+namespace Money.Math;
+
+public class DefaultMoneyMath : IMoneyMath {
+    private readonly IMoneyCurrencyConverter _converter;
+    
+    public DefaultMoneyMath(IMoneyCurrencyConverter converter) {
+        _converter = converter;
+    }
+
+    public Task<Result<Money>> Plus(Money first, Money second) {
+        if (first.Currency == second.Currency) {
+            return Task.FromResult(
+                Result<Money>.Ok(SameCurrencyPlus(first, second))
+            );
+        }
+
+        return _converter
+            .Convert(second, first.Currency)
+            .MapAsync(converted => SameCurrencyPlus(first, converted));
+    }
+
+    public Task<Result<Money>> Times(Money first, Money second) {
+        if (first.Currency == second.Currency) {
+            return Task.FromResult(
+                Result<Money>.Ok(SameCurrencyTimes(first, second))
+            );
+        }
+
+        return _converter
+            .Convert(second, first.Currency)
+            .MapAsync(converted => SameCurrencyTimes(first, converted));
+    }
+
+    public Task<Result<Money>> Divide(Money first, Money second) {
+        if (first.Currency == second.Currency) {
+            return Task.FromResult(
+                Result<Money>.Ok(SameCurrencyDivide(first, second))
+            );
+        }
+
+        return _converter
+            .Convert(second, first.Currency)
+            .MapAsync(converted => SameCurrencyDivide(first, converted));
+    }
+
+    public Task<Result<Money>> Minus(Money first, Money second) {
+        if (first.Currency == second.Currency) {
+            return Task.FromResult(
+                SameCurrencyMinus(first, second)
+            );
+        }
+
+        return _converter
+            .Convert(second, first.Currency)
+            .MapAsync(converted => SameCurrencyMinus(first, converted));
+    }
+
+    private Money SameCurrencyPlus(Money first, Money second) => first.CashAmount
+        .Plus(second.CashAmount)
+        .PipeNonNull(total => new Money(total, first.Currency));
+
+    private Money SameCurrencyTimes(Money first, Money second) => first.CashAmount
+        .Times(second.CashAmount)
+        .PipeNonNull(total => new Money(total, first.Currency));
+
+    private Money SameCurrencyDivide(Money first, Money second) => first.CashAmount
+        .DivideBy(second.CashAmount)
+        .PipeNonNull(total => new Money(total, first.Currency));
+
+    private Result<Money> SameCurrencyMinus(Money first, Money second) => (first.CashAmount.Amount - second.CashAmount.Amount)
+        .PipeNonNull(PositiveDecimal.Create)
+        .Map(total => new Money(total, first.Currency));
+}
