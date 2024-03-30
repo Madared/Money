@@ -3,52 +3,45 @@ using Results;
 
 namespace Tests;
 
-public class DecimalTests
-{
+public class DecimalTests {
     private const decimal DecimalHundred = 100M;
     private const decimal DecimalTwo = 2M;
     private static IPositiveDecimal OneHundred => PositiveDecimal.Create(DecimalHundred).Data;
     private static IPositiveDecimal Two => PositiveDecimal.Create(DecimalTwo).Data;
 
     [Fact]
-    public void Positive_Decimal_Cannot_Be_Created_With_Negative_Decimal()
-    {
+    public void Positive_Decimal_Cannot_Be_Created_With_Negative_Decimal() {
         Result<PositiveDecimal> positiveDecimalResult = PositiveDecimal.Create(-200M);
         Assert.True(positiveDecimalResult.Failed);
     }
 
     [Fact]
-    public void PositiveDecimal_Cannot_Be_Created_With_Zero()
-    {
+    public void PositiveDecimal_Cannot_Be_Created_With_Zero() {
         Result<PositiveDecimal> zeroResult = PositiveDecimal.Create(0M);
         Assert.True(zeroResult.Failed);
     }
 
     [Fact]
-    public void NegativeDecimal_Cannot_Be_Created_With_Positive_Decimal()
-    {
+    public void NegativeDecimal_Cannot_Be_Created_With_Positive_Decimal() {
         Result<NegativeDecimal> negativeResult = NegativeDecimal.Create(200M);
         Assert.True(negativeResult.Failed);
     }
 
     [Fact]
-    public void NegativeDecimal_Cannot_Be_Created_With_Zero()
-    {
+    public void NegativeDecimal_Cannot_Be_Created_With_Zero() {
         Result<NegativeDecimal> negativeResult = NegativeDecimal.Create(0M);
         Assert.True(negativeResult.Failed);
     }
 
     [Fact]
-    public void PositiveDecimal_Times_Correctly_Multiplies()
-    {
+    public void PositiveDecimal_Times_Correctly_Multiplies() {
         IPositiveDecimal multiplied = OneHundred.Times(Two);
         decimal multipliedDecimal = DecimalHundred * DecimalTwo;
         Assert.Equal(multipliedDecimal, multiplied.Amount);
     }
 
     [Fact]
-    public void PositiveDecimal_DivideBy_Correctly_Divides()
-    {
+    public void PositiveDecimal_DivideBy_Correctly_Divides() {
         IPositiveDecimal divided = OneHundred.DivideBy(Two).Data;
         decimal dividedDecimal = DecimalHundred / DecimalTwo;
         Assert.Equal(dividedDecimal, divided.Amount);
@@ -63,24 +56,37 @@ public class DecimalTests
     }
 
     [Fact]
-    public void PositiveDecimal_Plus_Correctly_Adds()
-    {
+    public void PositiveDecimal_Plus_Correctly_Adds() {
         IPositiveDecimal added = OneHundred.Plus(Two);
         decimal addedDecimal = DecimalHundred + DecimalTwo;
         Assert.Equal(addedDecimal, added.Amount);
     }
 
     [Fact]
-    public void PositiveDecimal_Max_Value_Plus_Throws_Overflow()
-    {
+    public void PositiveDecimal_Max_Value_Plus_Throws_Overflow() {
         IPositiveDecimal max = PositiveDecimal.Create(decimal.MaxValue).Data;
         Assert.Throws<OverflowException>(() => max.Plus(max));
     }
 
     [Fact]
-    public void PositiveDecimal_Max_Value_Times_Throws_Overflow()
-    {
+    public void PositiveDecimal_Max_Value_Times_Throws_Overflow() {
         IPositiveDecimal max = PositiveDecimal.Create(decimal.MaxValue).Data;
         Assert.Throws<OverflowException>(() => max.Plus(max));
+    }
+
+    [Fact]
+    public void NegativeDecimal_Times_Positive_Returns_NegativeDecimal() {
+        INegativeDecimal negative = NegativeDecimal.Create(-1000).Data;
+        IPositiveDecimal positive = PositiveDecimal.Create(1000).Data;
+        INegativeDecimal multiplied = negative.TimesPositive(positive);
+        Assert.Equal(-1000000, multiplied.Amount);
+    }
+
+    [Fact]
+    public void NegativeDecimal_Times_NegativeDecimal_Returns_PositiveDecimal() {
+        INegativeDecimal negativeOne = NegativeDecimal.Create(-1000).Data;
+        INegativeDecimal negativeTwo = NegativeDecimal.Create(-1000).Data;
+        IPositiveDecimal multiplied = negativeOne.Times(negativeTwo);
+        Assert.Equal(1000000, multiplied.Amount);
     }
 }
