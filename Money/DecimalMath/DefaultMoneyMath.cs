@@ -1,7 +1,7 @@
 using Money.Currency.Converters;
 using Results;
 
-namespace Money.Math;
+namespace Money.DecimalMath;
 
 public class DefaultMoneyMath : IMoneyMath {
     private readonly IMoneyCurrencyConverter _converter;

@@ -1,4 +1,4 @@
-namespace Money.Math;
+namespace Money.DecimalMath;
 
 public interface IDebtMath : IFundsMath<Debt> {
     
