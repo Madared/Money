@@ -21,7 +21,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Afonsomtsm.Result" Version="0.9.4"/>
+        <PackageReference Include="Afonsomtsm.Result" Version="0.9.5.3" />
     </ItemGroup>
 
 </Project>

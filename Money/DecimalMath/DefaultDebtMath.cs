@@ -12,7 +12,7 @@ public class DefaultDebtMath : IDebtMath {
 
     public async Task<Result<Debt>> Plus(Debt first, Debt second) {
         if (first.Currency == second.Currency) {
-            return SameCurrencyPlus(first, second).ToResult(new UnknownError());
+            return SameCurrencyPlus(first, second);
         }
 
         return await _converter
@@ -20,7 +20,7 @@ public class DefaultDebtMath : IDebtMath {
             .MapAsync(converted => SameCurrencyPlus(first, converted));
     }
 
-    private Debt SameCurrencyPlus(Debt first, Debt second) => first.DebtAmount
+    private Result<Debt> SameCurrencyPlus(Debt first, Debt second) => first.DebtAmount
         .Plus(second.DebtAmount)
-        .PipeNonNull(total => new Debt(total, first.Currency));
+        .Map(total => new Debt(total, first.Currency));
 }

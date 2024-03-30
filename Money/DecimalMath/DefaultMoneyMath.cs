@@ -13,7 +13,7 @@ public class DefaultMoneyMath : IMoneyMath {
     public Task<Result<Money>> Plus(Money first, Money second) {
         if (first.Currency == second.Currency) {
             return Task.FromResult(
-                Result<Money>.Ok(SameCurrencyPlus(first, second))
+                SameCurrencyPlus(first, second)
             );
         }
 
@@ -25,7 +25,7 @@ public class DefaultMoneyMath : IMoneyMath {
     public Task<Result<Money>> Times(Money first, Money second) {
         if (first.Currency == second.Currency) {
             return Task.FromResult(
-                Result<Money>.Ok(SameCurrencyTimes(first, second))
+                SameCurrencyTimes(first, second)
             );
         }
 
@@ -58,13 +58,13 @@ public class DefaultMoneyMath : IMoneyMath {
             .MapAsync(converted => SameCurrencyMinus(first, converted));
     }
 
-    private Money SameCurrencyPlus(Money first, Money second) => first.CashAmount
+    private Result<Money> SameCurrencyPlus(Money first, Money second) => first.CashAmount
         .Plus(second.CashAmount)
-        .PipeNonNull(total => new Money(total, first.Currency));
+        .Map(total => new Money(total, first.Currency));
 
-    private Money SameCurrencyTimes(Money first, Money second) => first.CashAmount
+    private Result<Money> SameCurrencyTimes(Money first, Money second) => first.CashAmount
         .Times(second.CashAmount)
-        .PipeNonNull(total => new Money(total, first.Currency));
+        .Map(total => new Money(total, first.Currency));
 
     private Result<Money> SameCurrencyDivide(Money first, Money second) => first.CashAmount
         .DivideBy(second.CashAmount)
@@ -76,9 +76,9 @@ public class DefaultMoneyMath : IMoneyMath {
 }
 
 public static class MoneyMathExtensions {
-    public static Money Times(this Money money, IPositiveDecimal multiplier) => money.CashAmount
+    public static Result<Money> Times(this Money money, IPositiveDecimal multiplier) => money.CashAmount
         .Times(multiplier)
-        .PipeNonNull(total => new Money(total, money.Currency));
+        .Map(total => new Money(total, money.Currency));
 
     public static Result<Money> Divide(this Money money, IPositiveDecimal divider) => money.CashAmount
         .DivideBy(divider)

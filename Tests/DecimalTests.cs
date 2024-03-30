@@ -35,9 +35,10 @@ public class DecimalTests {
 
     [Fact]
     public void PositiveDecimal_Times_Correctly_Multiplies() {
-        IPositiveDecimal multiplied = OneHundred.Times(Two);
+        Result<IPositiveDecimal> multiplied = OneHundred.Times(Two);
         decimal multipliedDecimal = DecimalHundred * DecimalTwo;
-        Assert.Equal(multipliedDecimal, multiplied.Amount);
+        Assert.True(multiplied.Succeeded);
+        Assert.Equal(multipliedDecimal, multiplied.Data.Amount);
     }
 
     [Fact]
@@ -57,36 +58,41 @@ public class DecimalTests {
 
     [Fact]
     public void PositiveDecimal_Plus_Correctly_Adds() {
-        IPositiveDecimal added = OneHundred.Plus(Two);
+        Result<IPositiveDecimal> added = OneHundred.Plus(Two);
         decimal addedDecimal = DecimalHundred + DecimalTwo;
-        Assert.Equal(addedDecimal, added.Amount);
+        Assert.True(added.Succeeded);
+        Assert.Equal(addedDecimal, added.Data.Amount);
     }
 
     [Fact]
-    public void PositiveDecimal_Max_Value_Plus_Throws_Overflow() {
+    public void PositiveDecimal_Max_Value_Plus_Fails() {
         IPositiveDecimal max = PositiveDecimal.Create(decimal.MaxValue).Data;
-        Assert.Throws<OverflowException>(() => max.Plus(max));
+        Result<IPositiveDecimal> added = max.Plus(max);
+        Assert.True(added.Failed);
     }
 
     [Fact]
     public void PositiveDecimal_Max_Value_Times_Throws_Overflow() {
         IPositiveDecimal max = PositiveDecimal.Create(decimal.MaxValue).Data;
-        Assert.Throws<OverflowException>(() => max.Plus(max));
+        Result<IPositiveDecimal> multiplied = max.Times(max);
+        Assert.True(multiplied.Failed);
     }
 
     [Fact]
     public void NegativeDecimal_Times_Positive_Returns_NegativeDecimal() {
         INegativeDecimal negative = NegativeDecimal.Create(-1000).Data;
         IPositiveDecimal positive = PositiveDecimal.Create(1000).Data;
-        INegativeDecimal multiplied = negative.TimesPositive(positive);
-        Assert.Equal(-1000000, multiplied.Amount);
+        Result<INegativeDecimal> multiplied = negative.TimesPositive(positive);
+        Assert.True(multiplied.Succeeded);
+        Assert.Equal(-1000000, multiplied.Data.Amount);
     }
 
     [Fact]
     public void NegativeDecimal_Times_NegativeDecimal_Returns_PositiveDecimal() {
         INegativeDecimal negativeOne = NegativeDecimal.Create(-1000).Data;
         INegativeDecimal negativeTwo = NegativeDecimal.Create(-1000).Data;
-        IPositiveDecimal multiplied = negativeOne.Times(negativeTwo);
-        Assert.Equal(1000000, multiplied.Amount);
+        Result<IPositiveDecimal> multiplied = negativeOne.Times(negativeTwo);
+        Assert.True(multiplied.Succeeded);
+        Assert.Equal(1000000, multiplied.Data.Amount);
     }
 }
