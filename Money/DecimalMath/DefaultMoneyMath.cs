@@ -5,7 +5,7 @@ namespace Money.DecimalMath;
 
 public class DefaultMoneyMath : IMoneyMath {
     private readonly IMoneyCurrencyConverter _converter;
-    
+
     public DefaultMoneyMath(IMoneyCurrencyConverter converter) {
         _converter = converter;
     }
@@ -37,7 +37,7 @@ public class DefaultMoneyMath : IMoneyMath {
     public Task<Result<Money>> Divide(Money first, Money second) {
         if (first.Currency == second.Currency) {
             return Task.FromResult(
-                Result<Money>.Ok(SameCurrencyDivide(first, second))
+                SameCurrencyDivide(first, second)
             );
         }
 
@@ -66,11 +66,21 @@ public class DefaultMoneyMath : IMoneyMath {
         .Times(second.CashAmount)
         .PipeNonNull(total => new Money(total, first.Currency));
 
-    private Money SameCurrencyDivide(Money first, Money second) => first.CashAmount
+    private Result<Money> SameCurrencyDivide(Money first, Money second) => first.CashAmount
         .DivideBy(second.CashAmount)
-        .PipeNonNull(total => new Money(total, first.Currency));
+        .Map(total => new Money(total, first.Currency));
 
     private Result<Money> SameCurrencyMinus(Money first, Money second) => (first.CashAmount.Amount - second.CashAmount.Amount)
         .PipeNonNull(PositiveDecimal.Create)
         .Map(total => new Money(total, first.Currency));
+}
+
+public static class MoneyMathExtensions {
+    public static Money Times(this Money money, IPositiveDecimal multiplier) => money.CashAmount
+        .Times(multiplier)
+        .PipeNonNull(total => new Money(total, money.Currency));
+
+    public static Result<Money> Divide(this Money money, IPositiveDecimal divider) => money.CashAmount
+        .DivideBy(divider)
+        .Map(total => new Money(total, money.Currency));
 }
