@@ -1,3 +1,5 @@
+using Results;
+
 namespace Money;
 
 public static class PositiveDecimalMath
@@ -15,8 +17,9 @@ public static class PositiveDecimalMath
     /// </summary>
     /// <param name="positiveDecimal"></param>
     /// <returns></returns>
-    public static IPositiveDecimal DivideBy(this IPositiveDecimal positiveDecimal, IPositiveDecimal dividend) =>
-        PositiveDecimal.Create(positiveDecimal.Amount / dividend.Amount).Data;
+    public static Result<IPositiveDecimal> DivideBy(this IPositiveDecimal positiveDecimal, IPositiveDecimal dividend) => PositiveDecimal
+        .Create(positiveDecimal.Amount / dividend.Amount)
+        .Map(positive => positive as IPositiveDecimal);
 
     /// <summary>
     /// Adds two positive values together guaranteeing the result of the operation is also a positive decimal

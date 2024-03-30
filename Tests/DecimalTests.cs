@@ -49,9 +49,17 @@ public class DecimalTests
     [Fact]
     public void PositiveDecimal_DivideBy_Correctly_Divides()
     {
-        IPositiveDecimal divided = OneHundred.DivideBy(Two);
+        IPositiveDecimal divided = OneHundred.DivideBy(Two).Data;
         decimal dividedDecimal = DecimalHundred / DecimalTwo;
         Assert.Equal(dividedDecimal, divided.Amount);
+    }
+
+    [Fact]
+    public void PositiveDecimal_MinValue_DivideBy_MaxValue_Gives_Failed_Result() {
+        IPositiveDecimal min = PositiveDecimal.Create(0.0000000001M).Data;
+        IPositiveDecimal max = PositiveDecimal.Create(decimal.MaxValue).Data;
+        Result<IPositiveDecimal> divided = min.DivideBy(max);
+        Assert.True(divided.Failed);
     }
 
     [Fact]
