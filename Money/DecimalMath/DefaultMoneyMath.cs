@@ -1,62 +1,39 @@
+using Microsoft.VisualBasic;
 using Money.Currency.Converters;
 using Results;
 
 namespace Money.DecimalMath;
 
-public class DefaultMoneyMath : IMoneyMath {
+public class DefaultMoneyMath {
     private readonly IMoneyCurrencyConverter _converter;
 
     public DefaultMoneyMath(IMoneyCurrencyConverter converter) {
         _converter = converter;
     }
 
-    public Task<Result<Money>> Plus(Money first, Money second) {
-        if (first.Currency == second.Currency) {
-            return Task.FromResult(
-                SameCurrencyPlus(first, second)
-            );
-        }
-
-        return _converter
+    public async Task<Result<Money>> Plus(Money first, Money second) => first.Currency == second.Currency
+        ? SameCurrencyPlus(first, second)
+        : await _converter
             .Convert(second, first.Currency)
             .MapAsync(converted => SameCurrencyPlus(first, converted));
-    }
 
-    public Task<Result<Money>> Times(Money first, Money second) {
-        if (first.Currency == second.Currency) {
-            return Task.FromResult(
-                SameCurrencyTimes(first, second)
-            );
-        }
-
-        return _converter
+    public async Task<Result<Money>> Times(Money first, Money second) => first.Currency == second.Currency
+        ? SameCurrencyTimes(first, second)
+        : await _converter
             .Convert(second, first.Currency)
             .MapAsync(converted => SameCurrencyTimes(first, converted));
-    }
 
-    public Task<Result<Money>> Divide(Money first, Money second) {
-        if (first.Currency == second.Currency) {
-            return Task.FromResult(
-                SameCurrencyDivide(first, second)
-            );
-        }
-
-        return _converter
+    public async Task<Result<Money>> Divide(Money first, Money second) => first.Currency == second.Currency
+        ? SameCurrencyDivide(first, second)
+        : await _converter
             .Convert(second, first.Currency)
             .MapAsync(converted => SameCurrencyDivide(first, converted));
-    }
 
-    public Task<Result<Money>> Minus(Money first, Money second) {
-        if (first.Currency == second.Currency) {
-            return Task.FromResult(
-                SameCurrencyMinus(first, second)
-            );
-        }
-
-        return _converter
+    public async Task<Result<Money>> Minus(Money first, Money second) => first.Currency == second.Currency
+        ? SameCurrencyMinus(first, second)
+        : await _converter
             .Convert(second, first.Currency)
             .MapAsync(converted => SameCurrencyMinus(first, converted));
-    }
 
     private Result<Money> SameCurrencyPlus(Money first, Money second) => first.CashAmount
         .Plus(second.CashAmount)
@@ -73,14 +50,4 @@ public class DefaultMoneyMath : IMoneyMath {
     private Result<Money> SameCurrencyMinus(Money first, Money second) => (first.CashAmount.Amount - second.CashAmount.Amount)
         .PipeNonNull(PositiveDecimal.Create)
         .Map(total => new Money(total, first.Currency));
-}
-
-public static class MoneyMathExtensions {
-    public static Result<Money> Times(this Money money, IPositiveDecimal multiplier) => money.CashAmount
-        .Times(multiplier)
-        .Map(total => new Money(total, money.Currency));
-
-    public static Result<Money> Divide(this Money money, IPositiveDecimal divider) => money.CashAmount
-        .DivideBy(divider)
-        .Map(total => new Money(total, money.Currency));
 }
