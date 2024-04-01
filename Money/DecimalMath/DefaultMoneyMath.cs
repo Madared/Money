@@ -13,8 +13,6 @@ public class DefaultMoneyMath {
     }
 
     public Task<Result<Money>> Plus(Money first, Money second) => Apply(first, second, SameCurrencyPlus);
-    public Task<Result<Money>> Times(Money first, Money second) => Apply(first, second, SameCurrencyTimes);
-    public Task<Result<Money>> Divide(Money first, Money second) => Apply(first, second, SameCurrencyDivide);
     public Task<Result<Money>> Minus(Money first, Money second) => Apply(first, second, SameCurrencyMinus);
 
     private delegate Result<Money> MoneyMathOperation(Money first, Money second);
@@ -26,14 +24,6 @@ public class DefaultMoneyMath {
 
     private Result<Money> SameCurrencyPlus(Money first, Money second) => first.CashAmount
         .Plus(second.CashAmount)
-        .Map(total => new Money(total, first.Currency));
-
-    private Result<Money> SameCurrencyTimes(Money first, Money second) => first.CashAmount
-        .Times(second.CashAmount)
-        .Map(total => new Money(total, first.Currency));
-
-    private Result<Money> SameCurrencyDivide(Money first, Money second) => first.CashAmount
-        .DivideBy(second.CashAmount)
         .Map(total => new Money(total, first.Currency));
 
     private Result<Money> SameCurrencyMinus(Money first, Money second) => (first.CashAmount.Amount - second.CashAmount.Amount)
