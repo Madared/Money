@@ -1,6 +1,6 @@
 using Results;
 
-namespace Money.Currency;
+namespace Money.Currencies;
 
 public record DecimalPrecisionValue
 {

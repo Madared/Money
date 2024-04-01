@@ -1,6 +1,6 @@
 using Results;
 
-namespace Money.Currency.Converters;
+namespace Money.Currencies.Converters;
 
 public interface IFundsCurrencyConverter<T> where T : IFunds {
     public Task<Result<T>> Convert(T toConvert, Currency convertTo);

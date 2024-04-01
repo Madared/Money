@@ -1,6 +1,6 @@
 using Results;
 
-namespace Money.Currency.RateService;
+namespace Money.Currencies.RateService;
 
 public class BackedUpRateService : IRateService
 {

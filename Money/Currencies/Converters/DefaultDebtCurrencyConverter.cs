@@ -1,7 +1,7 @@
-using Money.Currency.RateService;
+using Money.Currencies.RateService;
 using Results;
 
-namespace Money.Currency.Converters;
+namespace Money.Currencies.Converters;
 
 public class DefaultDebtCurrencyConverter : IDebtCurrencyConverter {
     private readonly IRateService _rateService;

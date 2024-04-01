@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace Money.Currency;
+namespace Money.Currencies;
 
 public record CurrencySymbol(string Symbol, string AbbreviationCode, CurrencySymbolPosition Position, bool Spaced)
 {

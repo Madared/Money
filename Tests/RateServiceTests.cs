@@ -1,5 +1,5 @@
-using Money.Currency;
-using Money.Currency.RateService;
+using Money.Currencies;
+using Money.Currencies.RateService;
 using Results;
 
 namespace Tests;

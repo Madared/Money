@@ -1,6 +1,6 @@
 using Money.Errors;
 
-namespace Money.Currency;
+namespace Money.Currencies;
 
 public record CurrencySeparators(string DecimalSeparator, string ThousandSeparator)
 {

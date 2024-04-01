@@ -1,7 +1,7 @@
-using Money.Currency.RateService;
+using Money.Currencies.RateService;
 using Results;
 
-namespace Money.Currency.Converters;
+namespace Money.Currencies.Converters;
 
 /// <summary>
 /// Default implementation of money currency converter

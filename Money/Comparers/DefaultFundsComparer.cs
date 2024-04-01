@@ -1,4 +1,4 @@
-using Money.Currency.Converters;
+using Money.Currencies.Converters;
 using Results;
 
 namespace Money.Comparers;

@@ -1,4 +1,4 @@
-using Money.Currency;
+using Money.Currencies;
 
 namespace Tests;
 
