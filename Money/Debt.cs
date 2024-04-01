@@ -3,7 +3,7 @@ using Money.Decimals;
 
 namespace Money;
 
-public record Debt(INegativeDecimal DebtAmount, Currency Currency) : IFunds
+public record Debt(INegativeDecimal DebtAmount, Currency Currency) : INonPositiveFunds
 {
     decimal IFunds.Amount => DebtAmount.Amount;
 }

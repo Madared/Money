@@ -4,7 +4,7 @@ using Results;
 
 namespace Money;
 
-public record Money(IPositiveDecimal CashAmount, Currency Currency) : IFunds {
+public record Money(IPositiveDecimal CashAmount, Currency Currency) : INonNegativeFunds {
     decimal IFunds.Amount => CashAmount.Amount;
 
     public static IFunds Create(INonNegativeDecimal nonNegativeDecimal, Currency currency) {
