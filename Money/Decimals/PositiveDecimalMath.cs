@@ -1,6 +1,6 @@
 using Results;
 
-namespace Money;
+namespace Money.Decimals;
 
 /// <summary>
 /// Extension methods to do math on positive decimals

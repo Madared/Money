@@ -1,4 +1,4 @@
-namespace Money;
+namespace Money.Decimals;
 
 /// <summary>
 /// Interface intended to be added to all decimals which can guarantee they will always be positive

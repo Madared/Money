@@ -1,7 +1,7 @@
 using Money.Errors;
 using Results;
 
-namespace Money;
+namespace Money.Decimals;
 
 public record PositiveDecimal : IPositiveDecimal
 {

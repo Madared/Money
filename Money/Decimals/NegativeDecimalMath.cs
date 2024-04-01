@@ -1,6 +1,6 @@
 using Results;
 
-namespace Money;
+namespace Money.Decimals;
 
 public static class NegativeDecimalMath {
 

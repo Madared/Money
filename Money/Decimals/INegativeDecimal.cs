@@ -1,4 +1,4 @@
-namespace Money;
+namespace Money.Decimals;
 
 public interface INegativeDecimal
 {
