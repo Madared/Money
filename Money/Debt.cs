@@ -1,4 +1,5 @@
 using Money.Currencies;
+using Money.Decimals;
 
 namespace Money;
 

@@ -1,5 +1,6 @@
 using Money.Currencies;
 using Money.Currencies.Converters;
+using Money.Decimals;
 using Results;
 
 namespace Money.DecimalMath;
