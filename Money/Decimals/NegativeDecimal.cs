@@ -5,7 +5,6 @@ namespace Money.Decimals;
 public record NegativeDecimal : INegativeDecimal
 {
     public decimal Amount { get; }
-
     private NegativeDecimal(decimal value) => Amount = value >= 0
         ? throw new InvalidDataException()
         : value;
