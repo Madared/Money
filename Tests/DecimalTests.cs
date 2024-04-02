@@ -1,5 +1,6 @@
 using System.Security.Cryptography;
 using Money.Decimals;
+using Money.Decimals.Math;
 using Results;
 
 namespace Tests;
@@ -44,7 +45,7 @@ public class DecimalTests {
 
     [Fact]
     public void PositiveDecimal_DivideBy_Correctly_Divides() {
-        IPositiveDecimal divided = OneHundred.DivideBy(Two).Data;
+        IPositiveDecimal divided = OneHundred.DivideBy(Two).AsPositive().Data;
         decimal dividedDecimal = DecimalHundred / DecimalTwo;
         Assert.Equal(dividedDecimal, divided.Amount);
     }
@@ -53,7 +54,7 @@ public class DecimalTests {
     public void PositiveDecimal_MinValue_DivideBy_MaxValue_Gives_Failed_Result() {
         IPositiveDecimal min = PositiveDecimal.Create(0.0000000001M).Data;
         IPositiveDecimal max = PositiveDecimal.Create(decimal.MaxValue).Data;
-        Result<IPositiveDecimal> divided = min.DivideBy(max);
+        Result<IPositiveDecimal> divided = min.DivideBy(max).AsPositive();
         Assert.True(divided.Failed);
     }
 
@@ -95,5 +96,30 @@ public class DecimalTests {
         Result<IPositiveDecimal> multiplied = negativeOne.Times(negativeTwo);
         Assert.True(multiplied.Succeeded);
         Assert.Equal(1000000, multiplied.Data.Amount);
+    }
+
+    [Fact]
+    public void PositiveDecimal_Times_With_Max_Values_Returns_Failed_Result_Wrapping_OverflowException() {
+        IPositiveDecimal maxDecimal = PositiveDecimal.Create(decimal.MaxValue).Data;
+        Result<IPositiveDecimal> multipliedResult = maxDecimal.Times(maxDecimal);
+        Assert.True(multipliedResult.Failed);
+        Assert.True(multipliedResult.Error is ExceptionWrapper);
+    }
+
+    [Fact]
+    public void PositiveDecimal_DivideBy_Small_Value_By_Max_Value_Returns_Zero() {
+        decimal small = 0.0000000001M;
+        IPositiveDecimal positiveSmall = PositiveDecimal.Create(small).Data;
+        IPositiveDecimal positiveMax = PositiveDecimal.Create(decimal.MaxValue).Data;
+        INonNegativeDecimal nonNegativeDecimal = positiveSmall.DivideBy(positiveMax);
+        Assert.True(nonNegativeDecimal.AsZero().Succeeded);
+    }
+
+    [Fact]
+    public void PositiveDecimal_Plus_With_Max_Values_Returns_Failed_Wrapping_OverflowException() {
+        IPositiveDecimal maxPositive = PositiveDecimal.Create(decimal.MaxValue).Data;
+        Result<IPositiveDecimal> addedResult = maxPositive.Plus(maxPositive);
+        Assert.True(addedResult.Failed);
+        Assert.True(addedResult.Error is ExceptionWrapper);
     }
 }
