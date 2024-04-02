@@ -39,7 +39,10 @@ public static class PositiveDecimalMath {
     /// <param name="positiveDecimal"></param>
     /// <param name="dividend"></param>
     /// <returns></returns>
-    public static INonNegativeDecimal DivideBy(this IPositiveDecimal positiveDecimal, IPositiveDecimal dividend) => DecimalFactory
+    public static Result<INonNegativeDecimal> DivideBy(this IPositiveDecimal positiveDecimal, IPositiveDecimal dividend) => DecimalFactory
+        .CreateNonNegative(positiveDecimal.Amount / dividend.Amount);
+
+    public static INonNegativeDecimal DivideByOrThrow(this IPositiveDecimal positiveDecimal, IPositiveDecimal dividend) => DecimalFactory
         .CreateNonNegative(positiveDecimal.Amount / dividend.Amount)
         .Data;
 
