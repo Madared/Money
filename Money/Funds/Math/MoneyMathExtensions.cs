@@ -11,6 +11,6 @@ public static class MoneyMathExtensions {
 
     public static Result<Money> Divide(this Money money, IPositiveDecimal divider) => money.CashAmount
         .DivideBy(divider)
-        .AsPositive()
+        .Map(value => value.AsPositive())
         .Map(total => money with { CashAmount = total });
 }

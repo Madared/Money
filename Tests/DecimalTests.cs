@@ -50,7 +50,7 @@ public class DecimalTests {
 
     [Fact]
     public void PositiveDecimal_DivideBy_Correctly_Divides() {
-        IPositiveDecimal divided = OneHundred.DivideBy(Two).AsPositive().Data;
+        IPositiveDecimal divided = OneHundred.DivideBy(Two).Data.AsPositive().Data;
         decimal dividedDecimal = DecimalHundred / DecimalTwo;
         Assert.Equal(dividedDecimal, divided.Amount);
     }
@@ -59,7 +59,7 @@ public class DecimalTests {
     public void PositiveDecimal_MinValue_DivideBy_MaxValue_Gives_Failed_Result() {
         IPositiveDecimal min = PositiveDecimal.Create(0.0000000001M).Data;
         IPositiveDecimal max = PositiveDecimal.Create(decimal.MaxValue).Data;
-        Result<IPositiveDecimal> divided = min.DivideBy(max).AsPositive();
+        Result<IPositiveDecimal> divided = min.DivideBy(max).Data.AsPositive();
         Assert.True(divided.Failed);
     }
 
@@ -116,8 +116,9 @@ public class DecimalTests {
         decimal small = 0.0000000001M;
         IPositiveDecimal positiveSmall = PositiveDecimal.Create(small).Data;
         IPositiveDecimal positiveMax = PositiveDecimal.Create(decimal.MaxValue).Data;
-        INonNegativeDecimal nonNegativeDecimal = positiveSmall.DivideBy(positiveMax);
-        Assert.True(nonNegativeDecimal.AsZero().Succeeded);
+        Result<INonNegativeDecimal> nonNegativeDecimal = positiveSmall.DivideBy(positiveMax);
+        Assert.True(nonNegativeDecimal.Succeeded);
+        Assert.True(nonNegativeDecimal.Data.AsZero().Succeeded);
     }
 
     [Fact]
