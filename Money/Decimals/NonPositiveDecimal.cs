@@ -14,7 +14,6 @@ public record NonPositiveDecimal : INonPositiveDecimal {
         ? Result<NonPositiveDecimal>.Ok(new NonPositiveDecimal(amount))
         : Result<NonPositiveDecimal>.Fail(new UnknownError());
 
-    public static INonPositiveDecimal Zero() => new ZeroDecimal();
     public static implicit operator decimal(NonPositiveDecimal nonPositive) => nonPositive.Amount;
     private static bool IsValid(decimal amount) => amount <= 0;
 }
