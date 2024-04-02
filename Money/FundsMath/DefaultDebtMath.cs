@@ -1,9 +1,8 @@
-using Money.Currencies;
 using Money.Currencies.Converters;
 using Money.Decimals;
 using Results;
 
-namespace Money.DecimalMath;
+namespace Money.FundsMath;
 
 public class DefaultDebtMath {
     private readonly IDebtCurrencyConverter _converter;

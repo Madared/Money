@@ -1,7 +1,7 @@
 using Money.Decimals;
 using Results;
 
-namespace Money.DecimalMath;
+namespace Money.FundsMath;
 
 public static class DebtMathExtensions {
     public static Result<Debt> Times(this Debt debt, IPositiveDecimal multiplier) => debt.DebtAmount
