@@ -1,5 +1,7 @@
 using Money.Currencies.RateService;
 using Money.Decimals;
+using Money.Decimals.Math;
+using Money.Funds;
 using Results;
 
 namespace Money.Currencies.Converters;

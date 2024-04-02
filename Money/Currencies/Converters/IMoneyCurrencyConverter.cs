@@ -2,7 +2,7 @@ using Results;
 
 namespace Money.Currencies.Converters;
 
-public interface IMoneyCurrencyConverter : IFundsCurrencyConverter<Money>
+public interface IMoneyCurrencyConverter : IFundsCurrencyConverter<Funds.Money>
 {
-    Task<Result<Money>> Convert(Money toConvert, Currency convertTo);
+    Task<Result<Funds.Money>> Convert(Funds.Money toConvert, Currency convertTo);
 }

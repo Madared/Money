@@ -23,4 +23,14 @@ public static class FundsFactory {
         _ => Result<INonNegativeFunds>.Fail(new UnknownError())
     };
 
+    public static INonNegativeFunds CreateNonNegative(INonNegativeDecimal amount, Currency currency) => amount
+        .AsPositive()
+        .Map<INonNegativeFunds>(positive => new Money(positive, currency))
+        .Or(new NoMoney(currency));
+
+    public static INonPositiveFunds CreateNonPositive(INonPositiveDecimal amount, Currency currency) => amount
+        .AsNegative()
+        .Map<INonPositiveFunds>(negative => new Debt(negative, currency))
+        .Or(new NoMoney(currency));
+
 }

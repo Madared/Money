@@ -2,10 +2,15 @@ using System.Security.Cryptography;
 using Money.Decimals;
 using Money.Decimals.Math;
 using Results;
+using Xunit.Abstractions;
 
 namespace Tests;
 
 public class DecimalTests {
+    private readonly ITestOutputHelper _testOutputHelper;
+    public DecimalTests(ITestOutputHelper testOutputHelper) {
+        _testOutputHelper = testOutputHelper;
+    }
     private const decimal DecimalHundred = 100M;
     private const decimal DecimalTwo = 2M;
     private static IPositiveDecimal OneHundred => PositiveDecimal.Create(DecimalHundred).Data;

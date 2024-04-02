@@ -1,4 +1,5 @@
 using Money.Currencies.RateService;
+using Money.Funds;
 using Results;
 
 namespace Money.Currencies.Converters;
@@ -25,5 +26,5 @@ public class DefaultFundsCurrencyConverter : IFundsCurrencyConverter<IFunds> {
     public Task<Result<IFunds>> Convert(IFunds toConvert, Currency convertTo) => _service
         .GetRate(toConvert.Currency, convertTo)
         .MapAsync(rate => toConvert.Amount * rate)
-        .MapAsync(multiplied => FundsGenerator.Create(multiplied, convertTo));
+        .MapAsync(multiplied => FundsFactory.Create(multiplied, convertTo));
 }

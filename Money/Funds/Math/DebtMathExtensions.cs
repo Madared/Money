@@ -9,7 +9,7 @@ public static class DebtMathExtensions {
         .TimesPositive(multiplier)
         .Map(total => new Debt(total, debt.Currency));
 
-    public static Result<Debt> DivideBy(this Debt debt, IPositiveDecimal dividend) => debt.DebtAmount
+    public static Result<INonPositiveFunds> DivideBy(this Debt debt, IPositiveDecimal dividend) => debt.DebtAmount
         .DividePositive(dividend)
-        .Map(total => new Debt(total, debt.Currency));
+        .Map(total => FundsFactory.CreateNonPositive(total, debt.Currency));
 }
