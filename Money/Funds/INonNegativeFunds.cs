@@ -1,6 +1,6 @@
 using Money.Decimals;
 
-namespace Money;
+namespace Money.Funds;
 
 public interface INonNegativeFunds : IFunds {
     INonNegativeDecimal Amount { get; }

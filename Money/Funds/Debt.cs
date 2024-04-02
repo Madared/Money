@@ -2,7 +2,7 @@ using Money.Currencies;
 using Money.Decimals;
 using Results;
 
-namespace Money;
+namespace Money.Funds;
 
 public record Debt(INegativeDecimal DebtAmount, Currency Currency) : INonPositiveFunds
 {

@@ -2,7 +2,7 @@ using Money.Currencies;
 using Money.Decimals;
 using Results;
 
-namespace Money;
+namespace Money.Funds;
 
 public record Money(IPositiveDecimal CashAmount, Currency Currency) : INonNegativeFunds {
     decimal IFunds.Amount => CashAmount.Amount;

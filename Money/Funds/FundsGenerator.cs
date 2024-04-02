@@ -2,7 +2,7 @@ using Money.Currencies;
 using Money.Decimals;
 using Results;
 
-namespace Money;
+namespace Money.Funds;
 
 public static class FundsGenerator {
     public static IFunds Create(decimal amount, Currency currency) => amount switch {

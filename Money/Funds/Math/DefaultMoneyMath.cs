@@ -3,7 +3,7 @@ using Money.Decimals;
 using Money.Decimals.Math;
 using Results;
 
-namespace Money.FundsMath;
+namespace Money.Funds.Math;
 
 public class DefaultMoneyMath {
     private readonly IMoneyCurrencyConverter _converter;

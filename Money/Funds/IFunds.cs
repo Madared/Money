@@ -1,6 +1,6 @@
 using Money.Currencies;
 
-namespace Money;
+namespace Money.Funds;
 
 public interface IFunds {
     decimal Amount { get; }
