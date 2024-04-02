@@ -1,6 +1,5 @@
 namespace Money.Decimals;
 
-public interface INegativeDecimal
-{
+public interface INegativeDecimal : INonPositiveDecimal {
     decimal Amount { get; }
 }
