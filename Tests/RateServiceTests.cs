@@ -20,9 +20,7 @@ public class RateServiceTests
         }
 
         await backUpService.GetRate(Currency.Dollar(), Currency.Dollar());
-
-        List<bool> called = fakeServices.Select(service => service.Called).ToList();
-        Assert.True(called.All(value => value));
+        Assert.True(fakeServices.All(value => value.Called));
     }
 }
 
