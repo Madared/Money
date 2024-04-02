@@ -26,5 +26,4 @@ public class DefaultFundsCurrencyConverter : IFundsCurrencyConverter<IFunds> {
         .GetRate(toConvert.Currency, convertTo)
         .MapAsync(rate => toConvert.Amount * rate)
         .MapAsync(multiplied => FundsGenerator.Create(multiplied, convertTo));
-    
 }

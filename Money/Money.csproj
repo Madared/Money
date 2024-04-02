@@ -9,7 +9,7 @@
 
     <PropertyGroup>
         <PackageId>Afonsomtsm.Money</PackageId>
-        <Version>0.2.2-alpha</Version>
+        <Version>0.2.3-alpha</Version>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <Authors>Afonso Matos</Authors>

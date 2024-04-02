@@ -6,6 +6,7 @@ namespace Money;
 
 public record Money(IPositiveDecimal CashAmount, Currency Currency) : INonNegativeFunds {
     decimal IFunds.Amount => CashAmount.Amount;
+    INonNegativeDecimal INonNegativeFunds.Amount => CashAmount;
 
     public static Result<Money> Create(decimal amount, Currency currency) {
         Result<PositiveDecimal> positive = PositiveDecimal.Create(amount);
