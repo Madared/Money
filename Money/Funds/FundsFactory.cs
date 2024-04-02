@@ -4,7 +4,7 @@ using Results;
 
 namespace Money.Funds;
 
-public static class FundsGenerator {
+public static class FundsFactory {
     public static IFunds Create(decimal amount, Currency currency) => amount switch {
         < 0 => NegativeDecimal.Create(amount).Map<IFunds>(negative => new Debt(negative, currency)).Data,
         > 0 => PositiveDecimal.Create(amount).Map<IFunds>(positive => new Money(positive, currency)).Data,
