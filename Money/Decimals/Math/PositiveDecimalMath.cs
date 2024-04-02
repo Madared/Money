@@ -37,22 +37,17 @@ public static class PositiveDecimalMath {
     /// Divides two positive decimal values together guaranteeing the result of the operation is also a positive decimal
     /// </summary>
     /// <param name="positiveDecimal"></param>
+    /// <param name="dividend"></param>
     /// <returns></returns>
-    public static Result<IPositiveDecimal> DivideBy(this IPositiveDecimal positiveDecimal, IPositiveDecimal dividend) {
-        try {
-            return PositiveDecimal
-                .Create(positiveDecimal.Amount / dividend.Amount)
-                .Map(positive => positive as IPositiveDecimal);
-        }
-        catch (OverflowException ex) {
-            return Result<IPositiveDecimal>.Fail(new ExceptionWrapper(ex));
-        }
-    }
+    public static INonNegativeDecimal DivideBy(this IPositiveDecimal positiveDecimal, IPositiveDecimal dividend) => DecimalFactory
+        .CreateNonNegative(positiveDecimal.Amount / dividend.Amount)
+        .Data;
 
     /// <summary>
     /// Adds two positive values together guaranteeing the result of the operation is also a positive decimal and wrapping all errors and exceptions in a result type
     /// </summary>
     /// <param name="positiveDecimal"></param>
+    /// <param name="additive"></param>
     /// <returns></returns>
     public static Result<IPositiveDecimal> Plus(this IPositiveDecimal positiveDecimal, IPositiveDecimal additive) {
         try {
