@@ -7,4 +7,6 @@ public interface INonNegativeDecimal {
 
     public Result<ZeroDecimal> AsZero();
     public Result<IPositiveDecimal> AsPositive();
+
+    public static bool IsNonNegative(decimal value) => value >= 0;
 }
