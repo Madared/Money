@@ -14,4 +14,6 @@ public interface IPositiveDecimal : INonNegativeDecimal
 
     Result<ZeroDecimal> INonNegativeDecimal.AsZero() => Result<ZeroDecimal>.Fail(new UnknownError());
     Result<IPositiveDecimal> INonNegativeDecimal.AsPositive() => Result<IPositiveDecimal>.Ok(this);
+
+    public static bool IsPositive(decimal amount) => amount > 0;
 }
