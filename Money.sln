@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Money", "Money\Money.csproj", "{AD54D02E-767E-4C73-B792-782C05824FE1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyManagement", "MoneyManagement\MoneyManagement.csproj", "{AD54D02E-767E-4C73-B792-782C05824FE1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{F48252C6-9264-4172-BD1B-2274C0B2361E}"
 EndProject

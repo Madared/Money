@@ -1,5 +1,5 @@
 using System.Globalization;
-using Money.Currencies;
+using MoneyManagement.Currencies;
 
 namespace Tests;
 

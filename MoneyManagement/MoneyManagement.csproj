@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <PackageId>Afonsomtsm.Money</PackageId>
+        <Version>0.3.0-alpha</Version>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <Authors>Afonso Matos</Authors>
+        <Description>A package to more easily deal with money</Description>
+        <Copyright>Copyright(c) Afonso Matos 2024</Copyright>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <RepositoryUrl>https://github.com/Madared/Money</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/Madared/Money</PackageProjectUrl>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Afonsomtsm.Result" Version="0.9.5.3" />
+    </ItemGroup>
+
+</Project>

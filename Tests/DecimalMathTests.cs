@@ -1,5 +1,5 @@
-using Money.Decimals;
-using Money.Decimals.Math;
+using MoneyManagement.Decimals;
+using MoneyManagement.Decimals.Math;
 using Results;
 
 namespace Tests;

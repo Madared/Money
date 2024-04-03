@@ -1,6 +1,6 @@
 using System.Security.Cryptography;
-using Money.Decimals;
-using Money.Decimals.Math;
+using MoneyManagement.Decimals;
+using MoneyManagement.Decimals.Math;
 using Results;
 using Xunit.Abstractions;
 
