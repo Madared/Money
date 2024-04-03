@@ -128,4 +128,42 @@ public class DecimalTests {
         Assert.True(addedResult.Failed);
         Assert.True(addedResult.Error is ExceptionWrapper);
     }
+
+    [Fact]
+    public void AsZero_Returns_ZeroDecimal_Success_Result() {
+        INonNegativeDecimal zeroDecimal = new ZeroDecimal();
+        Result<ZeroDecimal> asZero = zeroDecimal.AsZero();
+        Assert.True(asZero.Succeeded);
+        Assert.Equal(zeroDecimal, asZero.Data);
+    }
+
+    [Fact]
+    public void AsZero_Returns_Failed_Result_From_NegativeDecimal() {
+        INonPositiveDecimal negativeDecimal = NegativeDecimal.Create(-100).Data;
+        Result<ZeroDecimal> asZero = negativeDecimal.AsZero();
+        Assert.True(asZero.Failed);
+    }
+
+    [Fact]
+    public void AsNegative_Returns_NegativeDecimal_Success_Result() {
+        INonPositiveDecimal negativeDecimal = NegativeDecimal.Create(-100).Data;
+        Result<INegativeDecimal> asNegative = negativeDecimal.AsNegative();
+        Assert.True(asNegative.Succeeded);
+        Assert.Equal(negativeDecimal, asNegative.Data);
+    }
+
+    [Fact]
+    public void AsPositive_Returns_IPositiveDecimal_Success_Result() {
+        INonNegativeDecimal positiveDecimal = PositiveDecimal.Create(100).Data;
+        Result<IPositiveDecimal> asPositive = positiveDecimal.AsPositive();
+        Assert.True(asPositive.Succeeded);
+        Assert.Equal(positiveDecimal, asPositive.Data);
+    }
+
+    [Fact]
+    public void AsZero_Returns_Failed_Result_From_PositiveDecimal() {
+        INonNegativeDecimal positiveDecimal = PositiveDecimal.Create(100).Data;
+        Result<ZeroDecimal> asZero = positiveDecimal.AsZero();
+        Assert.True(asZero.Failed);
+    }
 }
