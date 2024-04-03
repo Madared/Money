@@ -12,7 +12,7 @@ public interface IPositiveDecimal : INonNegativeDecimal
     /// internal value of the positive decimal
     /// </summary>
     decimal Amount { get; }
-
+    decimal INonNegativeDecimal.Amount => Amount;
     Result<ZeroDecimal> INonNegativeDecimal.AsZero() => Result<ZeroDecimal>.Fail(new UnknownError());
     Result<IPositiveDecimal> INonNegativeDecimal.AsPositive() => Result<IPositiveDecimal>.Ok(this);
 

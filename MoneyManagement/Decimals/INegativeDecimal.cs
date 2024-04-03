@@ -11,6 +11,8 @@ public interface INegativeDecimal : INonPositiveDecimal {
     /// internal value
     /// </summary>
     decimal Amount { get; }
+    decimal INonPositiveDecimal.Amount => Amount;
+    
     Result<ZeroDecimal> INonPositiveDecimal.AsZero() => Result<ZeroDecimal>.Fail(new UnknownError());
     Result<INegativeDecimal> INonPositiveDecimal.AsNegative() => Result<INegativeDecimal>.Ok(this);
     
