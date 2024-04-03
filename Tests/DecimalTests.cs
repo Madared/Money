@@ -8,9 +8,11 @@ namespace Tests;
 
 public class DecimalTests {
     private readonly ITestOutputHelper _testOutputHelper;
+
     public DecimalTests(ITestOutputHelper testOutputHelper) {
         _testOutputHelper = testOutputHelper;
     }
+
     private const decimal DecimalHundred = 100M;
     private const decimal DecimalTwo = 2M;
     private static IPositiveDecimal OneHundred => PositiveDecimal.Create(DecimalHundred).Data;
@@ -165,5 +167,44 @@ public class DecimalTests {
         INonNegativeDecimal positiveDecimal = PositiveDecimal.Create(100).Data;
         Result<ZeroDecimal> asZero = positiveDecimal.AsZero();
         Assert.True(asZero.Failed);
+    }
+
+    [Fact]
+    public void DecimalFactory_CreateNonNegative_Creates_Successfully() {
+        decimal positiveValue = 100;
+        Result<INonNegativeDecimal> nonNegativeDecimal = DecimalFactory.CreateNonNegative(positiveValue);
+        Assert.True(nonNegativeDecimal.Succeeded);
+        Assert.Equal(positiveValue, nonNegativeDecimal.Data.Amount);
+    }
+
+    [Fact]
+    public void DecimalFactory_CreateNonNegative_Returns_Failed_Result_On_Negative_Value() {
+        Result<INonNegativeDecimal> nonNegativeValue = DecimalFactory.CreateNonNegative(-100);
+        Assert.True(nonNegativeValue.Failed);
+    }
+
+    [Fact]
+    public void DecimalFactory_Successfully_Creates_Zero() {
+        ZeroDecimal zero = new ZeroDecimal();
+        Result<INonNegativeDecimal> nonNegative = DecimalFactory.CreateNonNegative(0);
+        Result<INonPositiveDecimal> nonPositive = DecimalFactory.CreateNonPositive(0);
+        Assert.True(nonNegative.Succeeded);
+        Assert.True(nonPositive.Succeeded);
+        Assert.Equal(zero, nonNegative.Data);
+        Assert.Equal(zero, nonPositive.Data);
+    }
+
+    [Fact]
+    public void Decimal_Factory_CreateNonPositive_Creates_Successfully() {
+        decimal negativeValue = -100;
+        Result<INonPositiveDecimal> nonPositive = DecimalFactory.CreateNonPositive(negativeValue);
+        Assert.True(nonPositive.Succeeded);
+        Assert.Equal(negativeValue, nonPositive.Data.Amount);
+    }
+
+    [Fact]
+    public void Decimal_Factory_CreateNonPositive_Returns_Failed_Result_On_Positive_Value() {
+        Result<INonPositiveDecimal> nonPositive = DecimalFactory.CreateNonPositive(100);
+        Assert.True(nonPositive.Failed);
     }
 }
