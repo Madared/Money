@@ -10,7 +10,7 @@ public record PositiveDecimal : IPositiveDecimal
 
     private PositiveDecimal(decimal amount)
     {
-        if (!decimal.IsPositive(amount)) throw new InvalidPositiveDecimal(amount);
+        if (!IPositiveDecimal.IsPositive(amount)) throw new InvalidPositiveDecimal(amount);
         Amount = amount;
     }
 
@@ -19,7 +19,7 @@ public record PositiveDecimal : IPositiveDecimal
     /// </summary>
     /// <param name="amount">any decimal value</param>
     /// <returns>A result type containing either a valid Positive Decimal or an error</returns>
-    public static Result<PositiveDecimal> Create(decimal amount) => decimal.IsPositive(amount)
+    public static Result<PositiveDecimal> Create(decimal amount) => IPositiveDecimal.IsPositive(amount)
         ? Result<PositiveDecimal>.Ok(new PositiveDecimal(amount))
         : Result<PositiveDecimal>.Fail(new InvalidPositiveDecimal(amount));
 }

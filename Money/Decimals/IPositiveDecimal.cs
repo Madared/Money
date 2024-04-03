@@ -4,7 +4,7 @@ namespace Money.Decimals;
 
 /// <summary>
 /// Interface intended to be added to all decimals which can guarantee they will always be positive.
-/// Entities that implement this interface should always check for if the value passed is positive with the decimal.IsPositive method
+/// Checks should be done with IsPositive static method of interface and not decimal.IsPositive as that would return true for 0(zero)
 /// </summary>
 public interface IPositiveDecimal : INonNegativeDecimal
 {
@@ -15,4 +15,6 @@ public interface IPositiveDecimal : INonNegativeDecimal
 
     Result<ZeroDecimal> INonNegativeDecimal.AsZero() => Result<ZeroDecimal>.Fail(new UnknownError());
     Result<IPositiveDecimal> INonNegativeDecimal.AsPositive() => Result<IPositiveDecimal>.Ok(this);
+
+    public static bool IsPositive(decimal value) => value > 0;
 }
