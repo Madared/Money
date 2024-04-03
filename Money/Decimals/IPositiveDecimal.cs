@@ -3,7 +3,8 @@ using Results;
 namespace Money.Decimals;
 
 /// <summary>
-/// Interface intended to be added to all decimals which can guarantee they will always be positive
+/// Interface intended to be added to all decimals which can guarantee they will always be positive.
+/// Entities that implement this interface should always check for if the value passed is positive with the decimal.IsPositive method
 /// </summary>
 public interface IPositiveDecimal : INonNegativeDecimal
 {
