@@ -27,6 +27,6 @@ public class DefaultMoneyMath {
         .Map(total => new Money(total, first.Currency));
 
     private Result<Money> SameCurrencyMinus(Money first, Money second) => (first.CashAmount.Amount - second.CashAmount.Amount)
-        .PipeNonNull(PositiveDecimal.Create)
+        .Pipe(PositiveDecimal.Create)
         .Map(total => new Money(total, first.Currency));
 }

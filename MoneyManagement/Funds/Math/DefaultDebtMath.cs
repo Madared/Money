@@ -32,7 +32,7 @@ public class DefaultDebtMath {
 
     public Debt MutltiplyOrThrow(Debt original, IPositiveDecimal positive) => original.DebtAmount
         .TimesPositiveOrThrow(positive)
-        .PipeNonNull(total => original with { DebtAmount = total });
+        .Pipe(total => original with { DebtAmount = total });
 
     public Result<INonNegativeFunds> Divide(Debt original, INegativeDecimal negative) => original.DebtAmount
         .Divide(negative)

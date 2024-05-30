@@ -16,9 +16,9 @@ public record Currency(
     /// <returns></returns>
     public string Format(decimal value) => Math.Round(value, Precisions.DisplayPrecision)
         .ToString(CultureInfo.InvariantCulture)
-        .PipeNonNull(Symbol.AddSymbol)
-        .PipeNonNull(strValue => Separators.AddThousandSeparator(strValue, Precisions.DisplayPrecision))
-        .PipeNonNull(strValue => Separators.ReplaceDecimalSeparator(strValue, Precisions.DisplayPrecision));
+        .Pipe(Symbol.AddSymbol)
+        .Pipe(strValue => Separators.AddThousandSeparator(strValue, Precisions.DisplayPrecision))
+        .Pipe(strValue => Separators.ReplaceDecimalSeparator(strValue, Precisions.DisplayPrecision));
 
     public static Currency Dollar()
     {
