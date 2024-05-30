@@ -4,7 +4,7 @@ using Results;
 
 namespace MoneyManagement.Comparers;
 
-public class DefaultFundsComparer : IFundsComparer {
+public sealed class DefaultFundsComparer : IFundsComparer {
     private readonly IFundsCurrencyConverter _converter;
 
     public DefaultFundsComparer(IFundsCurrencyConverter converter) {

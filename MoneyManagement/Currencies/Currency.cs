@@ -3,7 +3,7 @@ using Results;
 
 namespace MoneyManagement.Currencies;
 
-public record Currency(
+public sealed record Currency(
     CurrencyName CurrencyName,
     CurrencyPrecisions Precisions,
     CurrencySymbol Symbol,

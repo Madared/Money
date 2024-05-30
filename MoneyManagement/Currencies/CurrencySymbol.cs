@@ -2,7 +2,7 @@ using System.Diagnostics;
 
 namespace MoneyManagement.Currencies;
 
-public record CurrencySymbol(string Symbol, string AbbreviationCode, CurrencySymbolPosition Position, bool Spaced)
+public sealed record CurrencySymbol(string Symbol, string AbbreviationCode, CurrencySymbolPosition Position, bool Spaced)
 {
     /// <summary>
     /// Adds the currency symbol to a string representation of the decimal value

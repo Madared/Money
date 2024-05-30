@@ -8,5 +8,4 @@ public interface IFundsCurrencyConverter<T> where T : IFunds {
 }
 
 public interface IFundsCurrencyConverter : IFundsCurrencyConverter<IFunds> {
-    
 }

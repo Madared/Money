@@ -2,7 +2,7 @@ using MoneyManagement.Errors;
 
 namespace MoneyManagement.Currencies;
 
-public record CurrencySeparators(string DecimalSeparator, string ThousandSeparator)
+public sealed record CurrencySeparators(string DecimalSeparator, string ThousandSeparator)
 {
     /// <summary>
     /// Adds the thousand separator to the string representation of a decimal value

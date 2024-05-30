@@ -3,7 +3,7 @@ using Results;
 
 namespace MoneyManagement;
 
-public record CurrencyName
+public sealed record CurrencyName
 {
     private string StringName { get; }
 

@@ -5,7 +5,7 @@ using Results;
 
 namespace MoneyManagement.Funds.Math;
 
-public class DefaultMoneyMath {
+public sealed class DefaultMoneyMath {
     private readonly IMoneyCurrencyConverter _converter;
 
     public DefaultMoneyMath(IMoneyCurrencyConverter converter) {

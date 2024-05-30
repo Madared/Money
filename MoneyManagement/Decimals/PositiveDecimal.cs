@@ -3,7 +3,7 @@ using Results;
 
 namespace MoneyManagement.Decimals;
 
-public record PositiveDecimal : IPositiveDecimal
+public sealed record PositiveDecimal : IPositiveDecimal
 {
     public decimal Amount { get; }
 

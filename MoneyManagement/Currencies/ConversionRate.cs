@@ -3,7 +3,7 @@ using Results;
 
 namespace MoneyManagement.Currencies;
 
-public record ConversionRate : IPositiveDecimal
+public sealed record ConversionRate : IPositiveDecimal
 {
     public decimal Amount { get; }
 

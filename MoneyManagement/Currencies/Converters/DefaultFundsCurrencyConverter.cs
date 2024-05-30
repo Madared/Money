@@ -7,7 +7,7 @@ namespace MoneyManagement.Currencies.Converters;
 /// <summary>
 /// The default Funds Currency converter
 /// </summary>
-public class DefaultFundsCurrencyConverter : IFundsCurrencyConverter<IFunds> {
+public sealed class DefaultFundsCurrencyConverter : IFundsCurrencyConverter<IFunds> {
     private readonly IRateService _service;
     /// <summary>
     /// Constructor

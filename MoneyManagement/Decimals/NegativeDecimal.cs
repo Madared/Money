@@ -2,7 +2,7 @@ using Results;
 
 namespace MoneyManagement.Decimals;
 
-public record NegativeDecimal : INegativeDecimal
+public sealed record NegativeDecimal : INegativeDecimal
 {
     public decimal Amount { get; }
 

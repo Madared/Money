@@ -3,7 +3,7 @@ using Results;
 
 namespace MoneyManagement.Decimals;
 
-public record ZeroDecimal() : INonNegativeDecimal, INonPositiveDecimal {
+public sealed record ZeroDecimal() : INonNegativeDecimal, INonPositiveDecimal {
     public decimal Amount => 0;
     Result<ZeroDecimal> INonPositiveDecimal.AsZero() => Result<ZeroDecimal>.Ok(this);
 

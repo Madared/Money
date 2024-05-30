@@ -2,7 +2,7 @@ using Results;
 
 namespace MoneyManagement.Currencies.RateService;
 
-public class ApiRateService : IRateService
+public sealed class ApiRateService : IRateService
 {
     private HttpClient _client;
 

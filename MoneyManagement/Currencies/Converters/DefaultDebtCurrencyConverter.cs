@@ -6,7 +6,7 @@ using Results;
 
 namespace MoneyManagement.Currencies.Converters;
 
-public class DefaultDebtCurrencyConverter : IDebtCurrencyConverter {
+public sealed class DefaultDebtCurrencyConverter : IDebtCurrencyConverter {
     private readonly IRateService _rateService;
 
     public DefaultDebtCurrencyConverter(IRateService rateService) {

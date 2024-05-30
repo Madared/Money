@@ -4,7 +4,7 @@ using Results;
 
 namespace MoneyManagement.Funds;
 
-public record Money(IPositiveDecimal CashAmount, Currency Currency) : INonNegativeFunds {
+public sealed record Money(IPositiveDecimal CashAmount, Currency Currency) : INonNegativeFunds {
     decimal IFunds.Amount => CashAmount.Amount;
     INonNegativeDecimal INonNegativeFunds.Amount => CashAmount;
 

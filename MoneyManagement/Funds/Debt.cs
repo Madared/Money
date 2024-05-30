@@ -4,7 +4,7 @@ using Results;
 
 namespace MoneyManagement.Funds;
 
-public record Debt(INegativeDecimal DebtAmount, Currency Currency) : INonPositiveFunds
+public sealed record Debt(INegativeDecimal DebtAmount, Currency Currency) : INonPositiveFunds
 {
     decimal IFunds.Amount => DebtAmount.Amount;
     INonPositiveDecimal INonPositiveFunds.Amount => DebtAmount;

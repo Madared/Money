@@ -1,5 +1,5 @@
 namespace MoneyManagement.Currencies;
 
-public record CurrencyPrecisions(
+public sealed record CurrencyPrecisions(
     DecimalPrecisionValue MathematicalPrecision,
     DecimalPrecisionValue DisplayPrecision);

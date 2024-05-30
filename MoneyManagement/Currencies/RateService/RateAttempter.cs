@@ -2,7 +2,7 @@ using Results;
 
 namespace MoneyManagement.Currencies.RateService;
 
-public class RateAttempter
+public sealed class RateAttempter
 {
     public Option<ConversionRate> ObtainedRate { get; private set; } = Option<ConversionRate>.None();
 

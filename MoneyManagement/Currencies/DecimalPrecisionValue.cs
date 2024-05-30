@@ -2,7 +2,7 @@ using Results;
 
 namespace MoneyManagement.Currencies;
 
-public record DecimalPrecisionValue
+public sealed record DecimalPrecisionValue
 {
     private int Value { get; }
 

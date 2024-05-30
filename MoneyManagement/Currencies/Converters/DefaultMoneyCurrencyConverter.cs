@@ -8,7 +8,7 @@ namespace MoneyManagement.Currencies.Converters;
 /// <summary>
 /// Default implementation of money currency converter
 /// </summary>
-public class DefaultMoneyCurrencyConverter : IMoneyCurrencyConverter
+public sealed class DefaultMoneyCurrencyConverter : IMoneyCurrencyConverter
 {
     private readonly IRateService _rateService;
 

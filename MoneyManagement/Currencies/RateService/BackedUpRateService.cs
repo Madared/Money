@@ -2,7 +2,7 @@ using Results;
 
 namespace MoneyManagement.Currencies.RateService;
 
-public class BackedUpRateService : IRateService
+public sealed class BackedUpRateService : IRateService
 {
     private readonly IRateService _main;
     private readonly List<IRateService> _backups = new();

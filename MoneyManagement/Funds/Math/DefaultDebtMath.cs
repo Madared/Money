@@ -6,7 +6,7 @@ using Results;
 
 namespace MoneyManagement.Funds.Math;
 
-public class DefaultDebtMath {
+public sealed class DefaultDebtMath {
     private readonly IDebtCurrencyConverter _converter;
     private readonly IMoneyCurrencyConverter _moneyConverter;
 
