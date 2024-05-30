@@ -1,6 +1,5 @@
 namespace MoneyManagement.Currencies;
 
-public record CurrencyRates(
-    ConversionRate ToDollar,
+public record CurrencyPrecisions(
     DecimalPrecisionValue MathematicalPrecision,
     DecimalPrecisionValue DisplayPrecision);
