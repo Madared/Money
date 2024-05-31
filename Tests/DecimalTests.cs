@@ -1,7 +1,8 @@
 using System.Security.Cryptography;
 using MoneyManagement.Decimals;
 using MoneyManagement.Decimals.Math;
-using Results;
+using ResultAndOption.Errors;
+using ResultAndOption.Results;
 using Xunit.Abstractions;
 
 namespace Tests;

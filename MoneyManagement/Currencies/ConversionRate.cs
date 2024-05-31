@@ -1,5 +1,6 @@
 using MoneyManagement.Decimals;
-using Results;
+using ResultAndOption.Errors;
+using ResultAndOption.Results;
 
 namespace MoneyManagement.Currencies;
 

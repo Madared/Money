@@ -1,6 +1,7 @@
 using MoneyManagement.Currencies.RateService;
 using MoneyManagement.Funds;
-using Results;
+using ResultAndOption.Results;
+using ResultAndOption.Results.GenericResultExtensions.Async;
 
 namespace MoneyManagement.Currencies.Converters;
 

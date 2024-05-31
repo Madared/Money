@@ -1,6 +1,8 @@
 using MoneyManagement.Currencies;
 using MoneyManagement.Decimals;
-using Results;
+using ResultAndOption.Errors;
+using ResultAndOption.Results;
+using ResultAndOption.Results.GenericResultExtensions;
 
 namespace MoneyManagement.Funds;
 

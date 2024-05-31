@@ -1,6 +1,7 @@
 using MoneyManagement.Currencies;
 using MoneyManagement.Currencies.RateService;
-using Results;
+using ResultAndOption.Errors;
+using ResultAndOption.Results;
 
 namespace Tests;
 

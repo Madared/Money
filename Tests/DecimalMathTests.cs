@@ -1,6 +1,7 @@
 using MoneyManagement.Decimals;
 using MoneyManagement.Decimals.Math;
-using Results;
+using ResultAndOption.Errors;
+using ResultAndOption.Results;
 
 namespace Tests;
 

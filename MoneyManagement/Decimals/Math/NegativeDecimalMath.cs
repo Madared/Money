@@ -1,4 +1,6 @@
-using Results;
+using ResultAndOption.Errors;
+using ResultAndOption.Results;
+using ResultAndOption.Results.GenericResultExtensions;
 
 namespace MoneyManagement.Decimals.Math;
 
@@ -6,7 +8,7 @@ public static class NegativeDecimalMath {
     public static Result<INegativeDecimal> Plus(this INegativeDecimal first, INegativeDecimal second) {
         try {
             decimal final = first.Amount + second.Amount;
-            return NegativeDecimal.Create(final).Map<INegativeDecimal>(negative => negative);
+            return NegativeDecimal.Create(final).Map(negative => negative as INegativeDecimal);
         }
         catch (OverflowException ex) {
             return Result<INegativeDecimal>.Fail(new ExceptionWrapper(ex));

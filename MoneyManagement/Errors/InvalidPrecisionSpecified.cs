@@ -1,5 +1,6 @@
 using MoneyManagement.Currencies;
-using Results;
+using ResultAndOption.Errors;
+using ResultAndOption.Results;
 
 namespace MoneyManagement.Errors;
 
@@ -14,7 +15,4 @@ public class InvalidPrecisionSpecified : Exception, IError
         _value = value;
         _precision = precision;
     }
-
-    public void Log(IErrorLogger logger) =>
-        logger.LogError(Message);
 }

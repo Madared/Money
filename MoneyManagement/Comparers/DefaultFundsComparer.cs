@@ -1,6 +1,7 @@
 using MoneyManagement.Currencies.Converters;
 using MoneyManagement.Funds;
-using Results;
+using ResultAndOption.Results;
+using ResultAndOption.Results.GenericResultExtensions.Async;
 
 namespace MoneyManagement.Comparers;
 
