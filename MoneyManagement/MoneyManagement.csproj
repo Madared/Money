@@ -10,7 +10,6 @@
     <PropertyGroup>
         <PackageId>Afonsomtsm.Money</PackageId>
         <Version>0.4.0-alpha</Version>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <Authors>Afonso Matos</Authors>
         <Description>A package to more easily deal with money</Description>
