@@ -1,6 +1,7 @@
 using MoneyManagement.Decimals;
 using MoneyManagement.Decimals.Math;
 using MoneyManagement.Currencies.RateService;
+using MoneyManagement.Funds;
 using ResultAndOption.Results;
 using ResultAndOption.Results.GenericResultExtensions.Async;
 
@@ -31,5 +32,6 @@ public sealed class DefaultMoneyCurrencyConverter : IMoneyCurrencyConverter
     public Task<Result<Funds.Money>> Convert(Funds.Money toConvert, Currency convertTo) => Task.Run(() =>_rateService
         .GetRate(toConvert.Currency, convertTo))
         .MapAsync(toConvert.CashAmount.Times)
+        .MapAsync(positiveAmount => new PositiveDecimal(positiveAmount))
         .MapAsync(cashAmount => new Funds.Money(cashAmount, convertTo));
 }

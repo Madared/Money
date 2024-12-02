@@ -12,6 +12,11 @@ public sealed record NegativeDecimal : INegativeDecimal
         Amount = value;
     }
 
+    public NegativeDecimal(INegativeDecimal negativeDecimal)
+    {
+        Amount = negativeDecimal.Amount;
+    }
+
     public static Result<NegativeDecimal> Create(decimal value) => INegativeDecimal.IsNegative(value)
         ? Result<NegativeDecimal>.Ok(new NegativeDecimal(value))
         : Result<NegativeDecimal>.Fail(new UnknownError());

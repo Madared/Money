@@ -27,9 +27,11 @@ public sealed class DefaultMoneyMath {
 
     private Result<Money> SameCurrencyPlus(Money first, Money second) => first.CashAmount
         .Plus(second.CashAmount)
+        .Map(positiveAmount => new PositiveDecimal(positiveAmount))
         .Map(total => new Money(total, first.Currency));
 
     private Result<Money> SameCurrencyMinus(Money first, Money second) => (first.CashAmount.Amount - second.CashAmount.Amount)
         .Pipe(PositiveDecimal.Create)
+        .Map(positiveAmount => new PositiveDecimal(positiveAmount))
         .Map(total => new Money(total, first.Currency));
 }

@@ -14,6 +14,11 @@ public sealed record PositiveDecimal : IPositiveDecimal
         Amount = amount;
     }
 
+    public PositiveDecimal(IPositiveDecimal positiveDecimal)
+    {
+        Amount = positiveDecimal.Amount;
+    }
+
     /// <summary>
     /// Attempts to create a valid Positive Decimal instance from the passed in decimal value
     /// </summary>

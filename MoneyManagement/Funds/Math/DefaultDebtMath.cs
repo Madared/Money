@@ -31,10 +31,12 @@ public sealed class DefaultDebtMath {
 
     public Result<Debt> Multiply(Debt original, IPositiveDecimal positive) => original.DebtAmount
         .TimesPositive(positive)
+        .Map(negativeAmount => new NegativeDecimal(negativeAmount))
         .Map(multiplied => original with { DebtAmount = multiplied });
 
     public Debt MutltiplyOrThrow(Debt original, IPositiveDecimal positive) => original.DebtAmount
         .TimesPositiveOrThrow(positive)
+        .Pipe(negativeAmount => new NegativeDecimal(negativeAmount))
         .Pipe(total => original with { DebtAmount = total });
 
     public Result<INonNegativeFunds> Divide(Debt original, INegativeDecimal negative) => original.DebtAmount
@@ -54,6 +56,7 @@ public sealed class DefaultDebtMath {
 
     private Result<Debt> SameCurrencyPlus(Debt first, Debt second) => first.DebtAmount
         .Plus(second.DebtAmount)
+        .Map(negativeAmount => new NegativeDecimal(negativeAmount))
         .Map(total => new Debt(total, first.Currency));
     
 }
