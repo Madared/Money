@@ -4,24 +4,17 @@ using ResultAndOption.Results;
 
 namespace MoneyManagement.Currencies;
 
-public sealed class FormattableCurrency : Currency
+public sealed class FormattableCurrency(
+    CurrencyName name,
+    FormattableCurrencySymbol symbol,
+    CurrencyPrecisions precisions,
+    CurrencySeparators separators)
+    : Currency
 {
-    public override CurrencyName Name { get; }
-    public override FormattableCurrencySymbol Symbol { get; }
-    public CurrencyPrecisions Precisions { get; }
-    public CurrencySeparators Separators { get; }
-
-    public FormattableCurrency(
-        CurrencyName name,
-        FormattableCurrencySymbol symbol,
-        CurrencyPrecisions precisions,
-        CurrencySeparators separators)
-    {
-        Name = name;
-        Symbol = symbol;
-        Precisions = precisions;
-        Separators = separators;
-    }
+    public override CurrencyName Name { get; } = name;
+    public override FormattableCurrencySymbol Symbol { get; } = symbol;
+    public CurrencyPrecisions Precisions { get; } = precisions;
+    public CurrencySeparators Separators { get; } = separators;
 
     /// <summary>
     /// Formats the currency value according to the specific internals provided such as symbols, separators, and precisions
