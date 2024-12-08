@@ -11,11 +11,11 @@ public sealed record Money(PositiveDecimal CashAmount, Currency Currency) : INon
     decimal IFunds.Amount => CashAmount.Amount;
     INonNegativeDecimal INonNegativeFunds.Amount => CashAmount;
 
-    public static Result<Money> Create(decimal amount, Currency currency)
+    public static Result<Money> Create(decimal amount, Currency formattableCurrency)
     {
         Result<PositiveDecimal> positive = PositiveDecimal.Create(amount);
         return positive.Failed 
             ? Result<Money>.Fail(new InvalidMoneyAmountError(amount)) 
-            : new Money(positive.Data, currency).ToResult(new UnknownError());
+            : new Money(positive.Data, formattableCurrency).ToResult(new UnknownError());
     }
 }

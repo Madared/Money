@@ -16,7 +16,7 @@ public sealed class DefaultDebtCurrencyConverter : IDebtCurrencyConverter {
 
     public Task<Result<Debt>> Convert(Debt toConvert, Currency convertTo) => _rateService
         .GetRate(toConvert.Currency, convertTo)
-        .MapAsync(rate => toConvert.DebtAmount.TimesPositive(rate))
+        .MapAsync(toConvert.DebtAmount.TimesPositive)
         .MapAsync(negativeAmount => new NegativeDecimal(negativeAmount))
         .MapAsync(converted => new Debt(converted, convertTo));
 }

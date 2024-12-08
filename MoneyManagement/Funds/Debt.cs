@@ -10,7 +10,7 @@ public sealed record Debt(NegativeDecimal DebtAmount, Currency Currency) : INonP
     decimal IFunds.Amount => DebtAmount.Amount;
     INonPositiveDecimal INonPositiveFunds.Amount => DebtAmount;
 
-    public static Result<Debt> Create(decimal amount, Currency currency)
+    public static Result<Debt> Create(decimal amount, FormattableCurrency currency)
     {
         Result<NegativeDecimal> negative = NegativeDecimal
             .Create(amount);
