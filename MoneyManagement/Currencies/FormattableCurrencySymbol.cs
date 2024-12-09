@@ -17,9 +17,9 @@ public sealed record FormattableCurrencySymbol(
     /// <exception cref="UnreachableException"></exception>
     public string AddSymbol(string value) => Position switch
     {
-        CurrencySymbolPosition.prefix => Symbol + (Spaced ? " " : "") + value,
-        CurrencySymbolPosition.postfix => value + (Spaced ? " " : "") + Symbol,
-        CurrencySymbolPosition.separator => value.Replace(".", Symbol),
+        CurrencySymbolPosition.Prefix => Symbol + (Spaced ? " " : "") + value,
+        CurrencySymbolPosition.Postfix => value + (Spaced ? " " : "") + Symbol,
+        CurrencySymbolPosition.Separator => value.Replace(".", Symbol),
         _ => throw new UnreachableException()
     };
 }

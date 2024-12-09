@@ -3,7 +3,7 @@ using ResultAndOption.Results;
 
 namespace MoneyManagement.Currencies.RateService;
 
-public sealed class RateAttempter
+internal sealed class RateAttempter
 {
     public Option<ConversionRate> ObtainedRate { get; private set; } = Option<ConversionRate>.None();
 

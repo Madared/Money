@@ -6,7 +6,7 @@ namespace MoneyManagement.Currencies.RateService;
 public sealed class BackedUpRateService : IRateService
 {
     private readonly IRateService _main;
-    private readonly List<IRateService> _backups = new();
+    private readonly List<IRateService> _backups = [];
 
     public BackedUpRateService(IRateService main)
     {

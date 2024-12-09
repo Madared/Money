@@ -1,3 +1,4 @@
+using MoneyManagement.Currencies;
 using MoneyManagement.Currencies.Converters;
 using MoneyManagement.Funds;
 using ResultAndOption.Results;
@@ -16,7 +17,8 @@ public sealed class DefaultFundsComparer : IFundsComparer
 
     public Task<Result<FundsComparison>> Compare(IFunds first, IFunds second)
     {
-        if (first.Currency != second.Currency)
+        DefaultCurrencyEqualityComparer currencyComparer = new();
+        if (currencyComparer.Equals(first.Currency, second.Currency))
         {
             return _converter
                 .Convert(second, first.Currency)

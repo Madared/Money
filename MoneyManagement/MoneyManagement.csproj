@@ -8,7 +8,7 @@
 
     <PropertyGroup>
         <PackageId>Afonsomtsm.Money</PackageId>
-        <Version>0.4.0-alpha</Version>
+        <Version>0.4.5-alpha</Version>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <Authors>Afonso Matos</Authors>
         <Description>A package to more easily deal with money</Description>

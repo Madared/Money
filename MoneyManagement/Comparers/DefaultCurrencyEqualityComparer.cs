@@ -1,4 +1,6 @@
-namespace MoneyManagement.Currencies;
+using MoneyManagement.Currencies;
+
+namespace MoneyManagement.Comparers;
 
 public sealed class DefaultCurrencyEqualityComparer : IEqualityComparer<Currency>
 {
