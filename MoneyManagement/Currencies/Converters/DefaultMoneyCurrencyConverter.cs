@@ -13,6 +13,7 @@ namespace MoneyManagement.Currencies.Converters;
 public sealed class DefaultMoneyCurrencyConverter : IMoneyCurrencyConverter
 {
     private readonly IRateService _rateService;
+    private readonly IFundsFactory _fundsFactory;
 
     /// <summary>
     /// Constructor
@@ -33,5 +34,5 @@ public sealed class DefaultMoneyCurrencyConverter : IMoneyCurrencyConverter
         .GetRate(toConvert.Currency , convertTo))
         .MapAsync(toConvert.CashAmount.Times)
         .MapAsync(positiveAmount => new PositiveDecimal(positiveAmount))
-        .MapAsync(cashAmount => new Funds.Money(cashAmount, convertTo));
+        .MapAsync(cashAmount => _fundsFactory.Money(cashAmount, convertTo));
 }

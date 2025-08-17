@@ -2,5 +2,6 @@ namespace MoneyManagement;
 
 public static class StringExtensions
 {
-    public static bool IsEmpty(this string str) => str.Length == 0 || str.AsSpan().IsWhiteSpace();
+    public static bool IsEmpty(this string str) => string.IsNullOrEmpty(str);
+    public static bool IsWhiteSpace(this string str) => string.IsNullOrWhiteSpace(str);
 }

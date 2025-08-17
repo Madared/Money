@@ -10,6 +10,7 @@ namespace MoneyManagement.Currencies.Converters;
 /// </summary>
 public sealed class DefaultFundsCurrencyConverter : IFundsCurrencyConverter<IFunds> {
     private readonly IRateService _service;
+    private readonly IFundsFactory _fundsFactory;
     /// <summary>
     /// Constructor
     /// </summary>
@@ -27,5 +28,5 @@ public sealed class DefaultFundsCurrencyConverter : IFundsCurrencyConverter<IFun
     public Task<Result<IFunds>> Convert(IFunds toConvert, Currency convertTo) => _service
         .GetRate(toConvert.Currency, convertTo)
         .MapAsync(rate => toConvert.Amount * rate)
-        .MapAsync(multiplied => FundsFactory.Create(multiplied, convertTo));
+        .MapAsync(multiplied => _fundsFactory.Create(multiplied, convertTo));
 }

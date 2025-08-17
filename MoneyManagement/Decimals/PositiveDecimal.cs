@@ -7,7 +7,6 @@ public sealed record PositiveDecimal : IPositiveDecimal
 {
     public decimal Amount { get; }
 
-
     private PositiveDecimal(decimal amount)
     {
         if (!IPositiveDecimal.IsPositive(amount)) throw new InvalidPositiveDecimal(amount);
@@ -27,4 +26,5 @@ public sealed record PositiveDecimal : IPositiveDecimal
     public static Result<PositiveDecimal> Create(decimal amount) => IPositiveDecimal.IsPositive(amount)
         ? Result<PositiveDecimal>.Ok(new PositiveDecimal(amount))
         : Result<PositiveDecimal>.Fail(new InvalidPositiveDecimal(amount));
+    public static implicit operator decimal (PositiveDecimal positiveDecimal) => positiveDecimal.Amount;
 }

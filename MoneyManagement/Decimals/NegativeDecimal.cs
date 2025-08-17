@@ -20,4 +20,5 @@ public sealed record NegativeDecimal : INegativeDecimal
     public static Result<NegativeDecimal> Create(decimal value) => INegativeDecimal.IsNegative(value)
         ? Result<NegativeDecimal>.Ok(new NegativeDecimal(value))
         : Result<NegativeDecimal>.Fail(new UnknownError());
+    public static implicit operator decimal(NegativeDecimal negativeDecimal) => negativeDecimal.Amount;
 }

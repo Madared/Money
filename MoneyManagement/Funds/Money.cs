@@ -7,15 +7,10 @@ using ResultAndOption.Results.GenericResultExtensions;
 
 namespace MoneyManagement.Funds;
 
-public sealed record Money(PositiveDecimal CashAmount, Currency Currency) : INonNegativeFunds {
+public abstract class Money(PositiveDecimal CashAmount, Currency Currency) : INonNegativeFunds
+{
+    public abstract PositiveDecimal CashAmount { get; }
+    public abstract Currency Currency { get; }
     decimal IFunds.Amount => CashAmount.Amount;
     INonNegativeDecimal INonNegativeFunds.Amount => CashAmount;
-
-    public static Result<Money> Create(decimal amount, Currency formattableCurrency)
-    {
-        Result<PositiveDecimal> positive = PositiveDecimal.Create(amount);
-        return positive.Failed 
-            ? Result<Money>.Fail(new InvalidMoneyAmountError(amount)) 
-            : new Money(positive.Data, formattableCurrency).ToResult(new UnknownError());
-    }
 }

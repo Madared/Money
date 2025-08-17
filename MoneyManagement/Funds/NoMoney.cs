@@ -3,8 +3,9 @@ using MoneyManagement.Decimals;
 
 namespace MoneyManagement.Funds;
 
-public sealed record NoMoney(Currency Currency) : INonNegativeFunds, INonPositiveFunds {
+public abstract class NoMoney : INonNegativeFunds, INonPositiveFunds {
     decimal IFunds.Amount => 0M;
+    public Currency Currency { get; }
     INonNegativeDecimal INonNegativeFunds.Amount => new ZeroDecimal();
     INonPositiveDecimal INonPositiveFunds.Amount => new ZeroDecimal();
 }

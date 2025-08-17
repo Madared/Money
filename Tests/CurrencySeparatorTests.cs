@@ -1,5 +1,8 @@
 using System.Globalization;
 using MoneyManagement.Currencies;
+using MoneyManagement.Validators;
+using ResultAndOption.Errors;
+using ResultAndOption.Results;
 
 namespace Tests;
 
@@ -10,7 +13,8 @@ public class CurrencySeparatorTests
     [Fact]
     public void Thousand_Separator_Gets_Added_At_Thousands()
     {
-        DecimalPrecisionValue precision = DecimalPrecisionValue.Create(2).Data;
+        IValidator<int> validator = new PositiveIntegerValidator();
+        DecimalPrecisionValue precision = DecimalPrecisionValue.Create(2, validator).Data;
         string toReplace = "1000000.50";
         string replaced = _separators.AddThousandSeparator(toReplace, precision);
         Assert.Equal("1_000_000.50", replaced);
@@ -23,5 +27,10 @@ public class CurrencySeparatorTests
         string stringedValue = value.ToString(CultureInfo.InvariantCulture);
         string replaced = _separators.ReplaceDecimalSeparator(stringedValue, DecimalPrecisionValue.Two());
         Assert.Equal("100#50", replaced);
+    }
+
+    private class PositiveIntegerValidator : IValidator<int>
+    {
+        public Result<int> Validate(int value) => value > 0 ? Result<int>.Ok(value) : Result<int>.Fail(new UnknownError());
     }
 }

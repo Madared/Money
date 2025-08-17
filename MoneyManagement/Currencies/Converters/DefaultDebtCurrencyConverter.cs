@@ -9,6 +9,7 @@ namespace MoneyManagement.Currencies.Converters;
 
 public sealed class DefaultDebtCurrencyConverter : IDebtCurrencyConverter {
     private readonly IRateService _rateService;
+    private readonly IFundsFactory _fundsFactory;
 
     public DefaultDebtCurrencyConverter(IRateService rateService) {
         _rateService = rateService;
@@ -18,5 +19,5 @@ public sealed class DefaultDebtCurrencyConverter : IDebtCurrencyConverter {
         .GetRate(toConvert.Currency, convertTo)
         .MapAsync(toConvert.DebtAmount.TimesPositive)
         .MapAsync(negativeAmount => new NegativeDecimal(negativeAmount))
-        .MapAsync(converted => new Debt(converted, convertTo));
+        .MapAsync(converted => _fundsFactory.Debt(converted, convertTo));
 }

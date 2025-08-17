@@ -5,17 +5,10 @@ using ResultAndOption.Results.GenericResultExtensions;
 
 namespace MoneyManagement.Funds;
 
-public sealed record Debt(NegativeDecimal DebtAmount, Currency Currency) : INonPositiveFunds
+public abstract class Debt : INonPositiveFunds
 {
+    public abstract NegativeDecimal DebtAmount { get; }
     decimal IFunds.Amount => DebtAmount.Amount;
+    public abstract Currency Currency { get; }
     INonPositiveDecimal INonPositiveFunds.Amount => DebtAmount;
-
-    public static Result<Debt> Create(decimal amount, FormattableCurrency currency)
-    {
-        Result<NegativeDecimal> negative = NegativeDecimal
-            .Create(amount);
-        return negative.Failed
-            ? Result<Debt>.Fail(new InvalidDebtAmountError(amount))
-            : Result<Debt>.Ok(new Debt(negative.Data, currency));
-    }
 }
