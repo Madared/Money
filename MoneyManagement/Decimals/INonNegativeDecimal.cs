@@ -15,7 +15,7 @@ public interface INonNegativeDecimal {
     /// <returns>Successful result if value is 0(zero) otherwise a failure result.</returns>
     public Result<ZeroDecimal> AsZero();
     /// <returns>Successful result if value is positive otherwise a failure result.</returns>
-    public Result<IPositiveDecimal> AsPositive();
+    public Result<PositiveDecimal> AsPositive();
 
     /// <summary>
     /// Checks if value is 0(zero) or more.

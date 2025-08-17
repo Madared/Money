@@ -34,32 +34,29 @@ public sealed class DefaultDebtMath {
             .MapAsync<NegativeDecimal, INonPositiveFunds>(negative => _factory.Debt(negative, original.Currency));
     }
 
-    public Result<Debt> Multiply(Debt original, IPositiveDecimal positive) => original.DebtAmount
+    public Result<Debt> Multiply(Debt original, PositiveDecimal positive) => original.DebtAmount
         .TimesPositive(positive)
-        .Map(negativeAmount => new NegativeDecimal(negativeAmount))
         .Map(multiplied => _factory.Debt(multiplied, original.Currency));
 
-    public Debt MutltiplyOrThrow(Debt original, IPositiveDecimal positive) => original.DebtAmount
+    public Debt MutltiplyOrThrow(Debt original, PositiveDecimal positive) => original.DebtAmount
         .TimesPositiveOrThrow(positive)
-        .Pipe(negativeAmount => new NegativeDecimal(negativeAmount))
         .Pipe(total => _factory.Debt(total, original.Currency));
 
-    public Result<INonNegativeFunds> Divide(Debt original, INegativeDecimal negative) => original.DebtAmount
+    public Result<INonNegativeFunds> Divide(Debt original, NegativeDecimal negative) => original.DebtAmount
         .Divide(negative)
         .Map(n => PositiveDecimal.Create(n.Amount))
         .Map<PositiveDecimal, INonNegativeFunds>(total => _factory.Money(total, original.Currency));
 
-    public Result<INonPositiveFunds> DivideByPositive(Debt original, IPositiveDecimal positive) => original.DebtAmount
+    public Result<INonPositiveFunds> DivideByPositive(Debt original, PositiveDecimal positive) => original.DebtAmount
         .DividePositive(positive)
         .Map(value => NegativeDecimal.Create(value.Amount))
         .Map<NegativeDecimal, INonPositiveFunds>(nonPositive => _factory.Debt(nonPositive, original.Currency));
     
-    public Result<Debt> Times(Debt debt, IPositiveDecimal multiplier) => debt.DebtAmount
+    public Result<Debt> Times(Debt debt, PositiveDecimal multiplier) => debt.DebtAmount
         .TimesPositive(multiplier)
-        .Map(negativeAmount => new NegativeDecimal(negativeAmount))
         .Map(total => _factory.Debt(total, debt.Currency));
 
-    public Result<INonPositiveFunds> DivideBy(Debt debt, IPositiveDecimal dividend) => debt.DebtAmount
+    public Result<INonPositiveFunds> DivideBy(Debt debt, PositiveDecimal dividend) => debt.DebtAmount
         .DividePositive(dividend)
         .Map(value => NegativeDecimal.Create(value.Amount))
         .Map<NegativeDecimal, INonPositiveFunds>(total => _factory.Debt(total, debt.Currency));
@@ -72,7 +69,6 @@ public sealed class DefaultDebtMath {
 
     private Result<Debt> SameCurrencyPlus(Debt first, Debt second) => first.DebtAmount
         .Plus(second.DebtAmount)
-        .Map(negativeAmount => new NegativeDecimal(negativeAmount))
         .Map(total => _factory.Debt(total, first.Currency));
     
 }

@@ -32,7 +32,6 @@ public sealed class DefaultMoneyCurrencyConverter : IMoneyCurrencyConverter
     /// <returns></returns>
     public Task<Result<Funds.Money>> Convert(Funds.Money toConvert, Currency convertTo) => Task.Run(() =>_rateService
         .GetRate(toConvert.Currency , convertTo))
-        .MapAsync(toConvert.CashAmount.Times)
-        .MapAsync(positiveAmount => new PositiveDecimal(positiveAmount))
+        .MapAsync(rate => toConvert.CashAmount.Times(rate))
         .MapAsync(cashAmount => _fundsFactory.Money(cashAmount, convertTo));
 }

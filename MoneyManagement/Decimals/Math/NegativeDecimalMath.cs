@@ -5,47 +5,47 @@ using ResultAndOption.Results.GenericResultExtensions;
 namespace MoneyManagement.Decimals.Math;
 
 public static class NegativeDecimalMath {
-    public static Result<INegativeDecimal> Plus(this INegativeDecimal first, INegativeDecimal second) {
+    public static Result<NegativeDecimal> Plus(this NegativeDecimal first, NegativeDecimal second) {
         try {
             decimal final = first.Amount + second.Amount;
-            return NegativeDecimal.Create(final).Map(negative => negative as INegativeDecimal);
+            return NegativeDecimal.Create(final);
         }
         catch (OverflowException ex) {
-            return Result<INegativeDecimal>.Fail(new ExceptionWrapper(ex));
+            return Result<NegativeDecimal>.Fail(new ExceptionWrapper(ex));
         }
     }
 
-    public static Result<INegativeDecimal> TimesPositive(this INegativeDecimal first, IPositiveDecimal second) {
+    public static Result<NegativeDecimal> TimesPositive(this NegativeDecimal first, PositiveDecimal second) {
         try {
             decimal final = first.Amount * second.Amount;
-            return NegativeDecimal.Create(final).Map(negative => negative as INegativeDecimal);
+            return NegativeDecimal.Create(final);
         }
         catch (OverflowException ex) {
-            return Result<INegativeDecimal>.Fail(new ExceptionWrapper(ex));
+            return Result<NegativeDecimal>.Fail(new ExceptionWrapper(ex));
         }
     }
 
-    public static INegativeDecimal TimesPositiveOrThrow(this INegativeDecimal first, IPositiveDecimal second) {
+    public static NegativeDecimal TimesPositiveOrThrow(this NegativeDecimal first, PositiveDecimal second) {
         decimal total = first.Amount * second.Amount;
         return NegativeDecimal.Create(total).Data;
     }
 
-    public static Result<IPositiveDecimal> Times(this INegativeDecimal first, INegativeDecimal second) {
+    public static Result<PositiveDecimal> Times(this NegativeDecimal first, NegativeDecimal second) {
         try {
             decimal final = first.Amount * second.Amount;
-            return PositiveDecimal.Create(final).Map(positive => positive as IPositiveDecimal);
+            return PositiveDecimal.Create(final);
         }
         catch (OverflowException ex) {
-            return Result<IPositiveDecimal>.Fail(new ExceptionWrapper(ex));
+            return Result<PositiveDecimal>.Fail(new ExceptionWrapper(ex));
         }
     }
 
-    public static IPositiveDecimal TimesOrThrow(this INegativeDecimal first, INegativeDecimal second) {
+    public static PositiveDecimal TimesOrThrow(this NegativeDecimal first, NegativeDecimal second) {
         decimal total = first.Amount * second.Amount;
         return PositiveDecimal.Create(total).Data;
     }
 
-    public static Result<INonNegativeDecimal> Divide(this INegativeDecimal first, INegativeDecimal second) {
+    public static Result<INonNegativeDecimal> Divide(this NegativeDecimal first, NegativeDecimal second) {
         try {
             decimal final = first.Amount / second.Amount;
             return DecimalFactory.CreateNonNegative(final);
@@ -55,11 +55,11 @@ public static class NegativeDecimalMath {
         }
     }
 
-    public static INonNegativeDecimal DivideOrThrow(this INegativeDecimal first, INegativeDecimal second) => DecimalFactory
+    public static INonNegativeDecimal DivideOrThrow(this NegativeDecimal first, NegativeDecimal second) => DecimalFactory
         .CreateNonNegative(first.Amount / second.Amount)
         .Data;
 
-    public static Result<INonPositiveDecimal> DividePositive(this INegativeDecimal first, IPositiveDecimal second) {
+    public static Result<INonPositiveDecimal> DividePositive(this NegativeDecimal first, PositiveDecimal second) {
         try {
             decimal final = first.Amount / second.Amount;
             return DecimalFactory.CreateNonPositive(final);
@@ -69,7 +69,7 @@ public static class NegativeDecimalMath {
         }
     }
 
-    public static INonPositiveDecimal DividePositiveOrThrow(this INegativeDecimal first, IPositiveDecimal second) {
+    public static INonPositiveDecimal DividePositiveOrThrow(this NegativeDecimal first, PositiveDecimal second) {
         decimal final = first.Amount / second.Amount;
         return DecimalFactory.CreateNonPositive(final).Data;
     }

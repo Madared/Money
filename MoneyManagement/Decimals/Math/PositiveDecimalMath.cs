@@ -13,14 +13,13 @@ public static class PositiveDecimalMath {
     /// </summary>
     /// <param name="positiveDecimal"></param>
     /// <returns></returns>
-    public static Result<IPositiveDecimal> Times(this IPositiveDecimal positiveDecimal, IPositiveDecimal multiplier) {
-        try {
-            return PositiveDecimal
-                .Create(positiveDecimal.Amount * multiplier.Amount)
-                .Map(positive => positive as IPositiveDecimal);
+    public static Result<PositiveDecimal> Times(this PositiveDecimal positiveDecimal, PositiveDecimal multiplier) {
+        try
+        {
+            return PositiveDecimal.Create(positiveDecimal.Amount * multiplier.Amount);
         }
         catch (OverflowException ex) {
-            return Result<IPositiveDecimal>.Fail(new ExceptionWrapper(ex));
+            return Result<PositiveDecimal>.Fail(new ExceptionWrapper(ex));
         }
     }
 
@@ -31,7 +30,7 @@ public static class PositiveDecimalMath {
     /// <param name="multiplier"></param>
     /// <exception cref="OverflowException"></exception>
     /// <returns></returns>
-    public static IPositiveDecimal TimesOrThrow(this IPositiveDecimal positiveDecimal, IPositiveDecimal multiplier) => PositiveDecimal
+    public static PositiveDecimal TimesOrThrow(this PositiveDecimal positiveDecimal, PositiveDecimal multiplier) => PositiveDecimal
         .Create(positiveDecimal.Amount * multiplier.Amount)
         .Data;
 
@@ -41,10 +40,10 @@ public static class PositiveDecimalMath {
     /// <param name="positiveDecimal"></param>
     /// <param name="dividend"></param>
     /// <returns></returns>
-    public static Result<INonNegativeDecimal> DivideBy(this IPositiveDecimal positiveDecimal, IPositiveDecimal dividend) => DecimalFactory
+    public static Result<INonNegativeDecimal> DivideBy(this PositiveDecimal positiveDecimal, PositiveDecimal dividend) => DecimalFactory
         .CreateNonNegative(positiveDecimal.Amount / dividend.Amount);
 
-    public static INonNegativeDecimal DivideByOrThrow(this IPositiveDecimal positiveDecimal, IPositiveDecimal dividend) => DecimalFactory
+    public static INonNegativeDecimal DivideByOrThrow(this PositiveDecimal positiveDecimal, PositiveDecimal dividend) => DecimalFactory
         .CreateNonNegative(positiveDecimal.Amount / dividend.Amount)
         .Data;
 
@@ -54,14 +53,13 @@ public static class PositiveDecimalMath {
     /// <param name="positiveDecimal"></param>
     /// <param name="additive"></param>
     /// <returns></returns>
-    public static Result<IPositiveDecimal> Plus(this IPositiveDecimal positiveDecimal, IPositiveDecimal additive) {
-        try {
-            return PositiveDecimal
-                .Create(positiveDecimal.Amount + additive.Amount)
-                .Map(positive => positive as IPositiveDecimal);
+    public static Result<PositiveDecimal> Plus(this PositiveDecimal positiveDecimal, PositiveDecimal additive) {
+        try
+        {
+            return PositiveDecimal.Create(positiveDecimal.Amount + additive.Amount);
         }
         catch (OverflowException ex) {
-            return Result<IPositiveDecimal>.Fail(new ExceptionWrapper(ex));
+            return Result<PositiveDecimal>.Fail(new ExceptionWrapper(ex));
         }
     }
 
@@ -72,7 +70,7 @@ public static class PositiveDecimalMath {
     /// <param name="additive"></param>
     /// <exception cref="OverflowException">when bounds of <see cref="decimal"/> are exceeded</exception>
     /// <returns></returns>
-    public static IPositiveDecimal PlusOrThrow(this IPositiveDecimal positiveDecimal, IPositiveDecimal additive) => PositiveDecimal
+    public static PositiveDecimal PlusOrThrow(this PositiveDecimal positiveDecimal, PositiveDecimal additive) => PositiveDecimal
         .Create(positiveDecimal.Amount + additive.Amount)
         .Data;
 }

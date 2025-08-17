@@ -3,21 +3,17 @@ using ResultAndOption.Results;
 
 namespace MoneyManagement.Decimals;
 
-public sealed record NegativeDecimal : INegativeDecimal
+public sealed record NegativeDecimal : INonPositiveDecimal
 {
     public decimal Amount { get; }
-
+    public Result<ZeroDecimal> AsZero() => Result<ZeroDecimal>.Fail(new UnknownError());
+    public Result<NegativeDecimal> AsNegative() => Result<NegativeDecimal>.Ok(this);
     private NegativeDecimal(decimal value) {
-        if (!INegativeDecimal.IsNegative(value)) throw new InvalidDataException();
+        if (value.IsNonNegative()) throw new InvalidDataException();
         Amount = value;
     }
-
-    public NegativeDecimal(INegativeDecimal negativeDecimal)
-    {
-        Amount = negativeDecimal.Amount;
-    }
-
-    public static Result<NegativeDecimal> Create(decimal value) => INegativeDecimal.IsNegative(value)
+    
+    public static Result<NegativeDecimal> Create(decimal value) => value.IsNegative()
         ? Result<NegativeDecimal>.Ok(new NegativeDecimal(value))
         : Result<NegativeDecimal>.Fail(new UnknownError());
     public static implicit operator decimal(NegativeDecimal negativeDecimal) => negativeDecimal.Amount;
