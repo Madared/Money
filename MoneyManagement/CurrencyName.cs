@@ -9,11 +9,7 @@ public sealed record CurrencyName
 {
     private string StringName { get; }
 
-    private CurrencyName(string name)
-    {
-        if (name.IsEmpty()) throw new InvalidOperationException();
-        StringName = name;
-    }
+    private CurrencyName(string name) => StringName = name;
 
     public static Result<CurrencyName> Create(string name, IValidator<string> validator) => validator
         .Validate(name)
